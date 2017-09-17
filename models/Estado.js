@@ -1,17 +1,29 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
-
+//declaracion de los esquemas que pertenecen a tipovehiculo
+var TipoVehiculo = require('./TipoVehiculo').schema;
+var marcaVehiculo = require('./MarcaVehiculos').schema;
+var modeloCarro = require('./ModelosCarro').schema;
+var tipoCombustible = require('./TipoCombustible').schema;
+var Vehiculo = require('./Vehiculo').schema;
+var Cliente = require('./Clientes').schema;
+var Inspeccion = require('./Inspeccion').schema;
+var Empleado = require('./Empleado').schema;
+var Renta = require('./Renta').schema;
 /**
  * Declaracion del esquema de estados
  */
 var EstadoSchema = new Schema({
     estado: {type:String, default:'Activo'},
-    tipoVehiculo: [{ type: Schema.Types.ObjectId, ref:'TipoVehiculo'}],
-    marcaVehiculo:[{type: Schema.Types.ObjectId, ref:'MarcaVehiculo'}],
-    modeloVehiculo: [{ type: Schema.Types.ObjectId, ref: 'ModeloCarro' }],
-    tipoCombustible:[{type:Schema.Types.ObjectId, ref:'TipoCombustible'}],
-    vehiculo:[{type:Schema.Types.ObjectId, ref:'Vehiculo'}],
-    cliente:[{type:Scehma.Types.ObjectId, ref:'Cliente'}]
+    tipoVehiculo: [TipoVehiculo],
+    marcaVehiculo:[marcaVehiculo],
+    modeloVehiculo: [modeloCarro],
+    tipoCombustible:[tipoCombustible],
+    vehiculo:[Vehiculo],
+    cliente:[Cliente],
+    inspeccion:[Inspeccion],
+    empleado:[Empleado],
+    renta: [Renta]
 
 });
 

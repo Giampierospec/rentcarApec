@@ -3,13 +3,11 @@ var Schema = mongoose.Schema;
 /**
  * Modelado del tipo de vehiculo
  */
+var Vehiculo = require('./Vehiculo').schema;
 var TipoVehiculoSchema = new Schema({
-    Descripcion:{type: String, required: true},
-    estado:{type:Schema.Types.ObjectId, ref:'Estado' },
-    vehiculo: [{ type: Schema.Types.ObjectId, ref: 'Vehiculo' }]
+    descripcion:{type: String, required: true},
+    estado:{type:String},
+    vehiculo: [Vehiculo]
 });
-
-
-
-var TipoVehiculo = mongoose.model("TipoVehiculo",TipoVehiculoSchema);
-module.exports = TipoVehiculo;
+exports.model = mongoose.model("TipoVehiculo", TipoVehiculoSchema);
+exports.schema = TipoVehiculoSchema;

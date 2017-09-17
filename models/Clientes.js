@@ -7,10 +7,15 @@ var ClientesSchema = new Schema({
     cedula:{type:String},
     noTarjetaCR:{type:Number},
     limiteCredito: Number,
-    tipoPersona:{Type:String, default:'Fisica'},
+    tipoPersona:{type:String, default:'Fisica'},
     estado:{type:Schema.Types.ObjectId, ref:'Estado'},
-    vehiculo:{Type:Schema.Types.ObjectId, ref:'Vehiculo'}
+    vehiculo:{type:Schema.Types.ObjectId, ref:'Vehiculo'},
+    renta: [{ type: Schema.Types.ObjectId, ref: 'Renta' }],
+    inspeccion: [{ type: Schema.Types.ObjectId, ref: 'Inspeccion' }]
 });
 
-var Cliente = mongoose.model("Cliente", ClientesSchema);
+var Cliente = {
+    schema: ClientesSchema,
+    model:mongoose.model("Cliente", ClientesSchema)
+};
 module.exports = Cliente;

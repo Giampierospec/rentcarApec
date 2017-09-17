@@ -1,0 +1,23 @@
+{
+  "name": "rentacar",
+  "description": "program to rent cars",
+  "main": "",
+  "authors": [
+    "Giampiero Specogna <giampi_12@hotmail.com>"
+  ],
+  "license": "MIT",
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "^3.3.7",
+    "font-awesome": "^4.7.0",
+    "animate.css": "^3.5.2",
+    "vue": "^2.4.4"
+  }
+}

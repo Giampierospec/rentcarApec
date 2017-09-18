@@ -2,9 +2,9 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 var Vehiculo = require('./Vehiculo').schema;
 var ModeloSchema = new Schema({
-    marca:{type:Schema.Types.ObjectId, ref:'MarcaVehiculo'},
+    marca:{type:String},
     descripcion:{type:String, required:true},
-    estado: { type: Schema.Types.ObjectId, ref: 'Estado' },
+    estado: { type: String},
     vehiculo: [Vehiculo]
 });
 

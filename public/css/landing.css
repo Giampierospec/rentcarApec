@@ -1,0 +1,10 @@
+.jb-landing{
+    background-color: azure;
+    box-shadow: 10px 10px 5px #888888; 
+    margin-top: 25%;
+    z-index: 2;
+}
+body{
+    background: url('/img/Car-rental.jpg');
+    z-index: -1;
+}

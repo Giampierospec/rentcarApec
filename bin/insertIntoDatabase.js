@@ -130,7 +130,25 @@ var addTipoVehiculo = function(callback){
         if (err) {
             console.error('Error insertando Tipo de Vehiculos');
         }
+        
         console.log('Tipo de vehiculos añadidos de manera correcta');
+        callback();
+    });
+    
+};
+var addModeloVehiculo = function(callback){
+    ModeloCarro.create(data.modeloVehiculo, function(err, modelo){
+        if(err){
+            return console.error('Error insertando modelo de carro');
+        }
+        console.log('Marca de vehiculos añadida satisfactoriamente');
+        callback();
+    });
+};
+var addTipoCombustible = function(callback){
+    TipoCombustible.create(data.tipoCombustible, function(err, modelo){
+        if (err) { return console.error(err); }
+        console.log("tipo de combustible añadido correctamente");
         callback();
     });
     
@@ -141,59 +159,179 @@ var updateTipoVehiculo = function(callback){
     
         Estados.findOne({ estado: 'Activo' }, function (err, estado) {
             if (err) { return console.error(err); }
-            console.log(estado);
-            estado.tipoVehiculo.push(tipovehiculo._id);
+            tipovehiculo.estado = estado.estado;
+            estado.tipoVehiculo.push(tipovehiculo);
             estado.save(function(err){
-                if(err){return console.error("error");}
+                if(err){return console.error(err);}
                 console.log(estado);
             });
-            tipovehiculo.estado = estado.estado;
-            tipovehiculo.save(function (err) {
-                if (err) { return console.log(err); }
+            tipovehiculo.save(function(err){
+                if(err){return console.error(err);}
                 console.log(tipovehiculo);
             });
             callback();
         });
-        
+       
         
     });
+    
 };
 var addMarcaVehiculo = function(callback){
 MarcaVehiculo.create(data.marcaVehiculo, function(err, marca){
-
+    if(err){return console.error(err);}
+    console.log('Marcas vehiculo creadas correctamente ',marca);
+    callback();    
 });
 };
-var updateVehiculo = function(callback){
-    Vehiculo.find({}, function(err, vehiculo){
-
-        Estados.findOne({estado: 'Activo'}, function(err, estado){
-            if (err) { return console.error(err); }
-            estado.vehiculo.push(vehiculo[0]);
-            estado.save(function (err) {
-                if (err) { return console.error("error"); }
+var updateTipoCombustible = function(callback){
+    TipoCombustible.findOne({descripcion:"Diesel"},function(err, tc){
+        Estados.findOne({estado:'Activo'}, function(err, estado){
+            tc.estado = estado.estado;
+            estado.tipoCombustible.push(tc);
+            estado.save(function(err){
+                if(err){return console.error(err);}
                 console.log(estado);
             });
-            vehiculo.estado = estado.estado;
-            vehiculo[0].save(function (err) {
-                if (err) { return console.log(err); }
-                console.log(vehiculo);
+            tc.save(function(err){
+                if(err){return console.error(err);}
+                console.log(tc);
             });
             
         });
-        TipoVehiculo.findOne({descripcion:"Suv"}, function(err, tv){
-            tv.vehiculo.push(vehiculo[0]);
-            vehiculo[0].tipoVehiculo = tv.descripcion;
-            tv.save(function(err){
+    });
+};
+var updateMarcaVehiculo = function (callback){
+    MarcaVehiculo.findOne({descripcion:'Toyota'}, function(err, marca){
+        if(err){return console.error(err);}
+        Estados.findOne({estado:'Activo'}, function(err, estado){
+            marca.estado = estado.estado;
+            estado.marcaVehiculo.push(marca);
+            estado.save(function(err){
                 if(err){return console.error(err);}
-                console.log(tv);
+                console.log(estado);
             });
-            vehiculo[0].save(function (err) {
-                if (err) { return console.log(err); }
+          marca.save(function(err){
+            if(err){return console.error(err);}
+              console.log(marca);
+          });
+            callback();
+        });
+         
+    });
+       
+};
+
+var updateVehiculoOnEstado = function(callback){
+    Vehiculo.findOne({descripcion:"Rojo"}, function(err, vehiculo){
+
+        Estados.findOne({estado: 'Activo'}, function(err, estado){
+            if (err) { return console.error(err); }
+            vehiculo.estado = estado.estado;
+            estado.vehiculo.push(vehiculo);
+            estado.save(function (err) {
+                if (err) { return console.error(err); }
+                console.log(estado);
+            });
+            vehiculo.save(function(err){
+                if(err){return console.error(err);}
                 console.log(vehiculo);
             });
+            callback();
         });
     });
 };
+var updateVehiculoOnTipo = function(callback){
+    Vehiculo.findOne({descripcion:'Rojo'}, function(err, vehiculo){
+        TipoVehiculo.findOne({ descripcion: 'Suv' }, function (err, tv) {
+            if (err) { return console.error(err); }
+            vehiculo.tipoVehiculo = tv.descripcion;
+            tv.vehiculo.push(vehiculo);
+            tv.save(function (err) {
+                if (err) { return console.error(err); }
+                console.log(tv);
+            });
+
+            vehiculo.save(function (err) {
+                if (err) { return console.error(err); }
+                console.log(vehiculo);
+            });
+            callback();
+        });
+    });
+};
+var updateModeloOnEstado = function(callback){
+    ModeloCarro.findOne({descripcion:'Camry'}, function(err, modelo){
+        Estados.findOne({estado:'Activo'},function(err, estado){
+            modelo.estado = estado.estado;
+            estado.modeloVehiculo.push(modelo);
+            estado.save(function(err){
+                if(err){return console.log(err);}
+                console.log(estado);
+            });
+            modelo.save(function(err){
+                if(err){return console.error(err);}
+                console.log(modelo);
+            });
+            callback();
+        });
+    });
+};
+var updateModeloOnMarca = function (callback) {
+    ModeloCarro.findOne({ descripcion: 'Camry' }, function (err, modelo) {
+        MarcaVehiculo.findOne({ descripcion: 'Toyota' }, function (err, marca) {
+            modelo.marca = marca.descripcion;
+            marca.modelo.push(modelo);
+            marca.save(function (err) {
+                if (err) { return console.log(err); }
+                console.log(marca);
+            });
+            modelo.save(function (err) {
+                if (err) { return console.error(err); }
+                console.log(modelo);
+            });
+            callback();
+        });
+    });
+};
+var updateVehiculoOnMarca = function(callback){
+    Vehiculo.findOne({ descripcion: 'Rojo' }, function (err, vehiculo) {
+        MarcaVehiculo.findOne({ descripcion: 'Toyota' }, function (err, marca) {
+            if (err) { return console.error(err); }
+            vehiculo.marca = marca.descripcion;
+            vehiculo.modelo = marca.modelo[0].descripcion;
+            marca.vehiculo.push(vehiculo);
+            marca.save(function (err) {
+                if (err) { return console.error(err); }
+                console.log(marca);
+            });
+
+            vehiculo.save(function (err) {
+                if (err) { return console.error(err); }
+                console.log(vehiculo);
+            });
+            callback();
+        });
+    });
+};
+var updateVehiculoOnTipoCombustible = function(callback){
+    Vehiculo.findOne({descripcion:'Rojo'}, function(err, vehiculo){
+        TipoCombustible.findOne({descripcion:"Diesel"}, function(err, tc){
+            if(err){return console.error(err);}
+            vehiculo.tipoCombustible = tc.descripcion;
+            tc.vehiculo.push(vehiculo);
+            tc.save(function(err){
+                if(err){return console.error(err);}
+                console.log(tc);
+            });
+            vehiculo.save(function (err) {
+                if (err) { return console.error(err); }
+                console.log(vehiculo);
+            });
+            callback();
+        });
+    });
+};
+
 async.series([
     removeEstados,
     removeTipoVehiculos,
@@ -204,12 +342,23 @@ async.series([
     addEstados,
     addVehiculos,
     addTipoVehiculo,
+    addMarcaVehiculo,
+    addModeloVehiculo,
+    addTipoCombustible,
+    updateModeloOnMarca,
+    updateVehiculoOnTipo,
+    updateVehiculoOnMarca,
+    updateVehiculoOnEstado,
+    updateVehiculoOnTipoCombustible,
     updateTipoVehiculo,
-    updateVehiculo
+    updateMarcaVehiculo,
+    updateModeloOnEstado,
+    updateTipoCombustible
 ],function(error, results){
     if (error) {
         console.error('Error: ' + error);
     }
     mongoose.connection.close();
     console.log('Done!');
+    process.exit(0);
 });

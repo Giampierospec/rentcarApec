@@ -1,0 +1,35 @@
+extends layout
+
+block content
+  div(class="row")
+    div(class="col-sm-8 col-sm-offset-2")
+      h2(class="text-center") Vehículos almacenados
+      a(href="/InsertVehiculos", class="btn btn-primary") Insertar
+      br
+      br
+      table(class="table table-responsive")
+        thead
+          tr
+            th Descripcion
+            th No. Chasis
+            th No. Motor
+            th No. Placa
+            th Tipo Vehiculo
+            th Marca
+            th Modelo
+            th Tipo Combustible
+            th Estado
+        tbody
+          -for(var i = 0; i < data.length; i++){
+          tr
+            td= data[i].descripcion
+            td= parseInt(data[i].noChasis)
+            td= parseInt(data[i].noMotor)
+            td= parseInt(data[i].noPlaca)
+            td= data[i].tipoVehiculo
+            td=data[i].marca
+            td=data[i].modelo
+            td=data[i].tipoCombustible
+            td=data[i].estado
+          -}
+

@@ -7,10 +7,15 @@ var vehiculosCtrl = require('../controllers/vehiculosCtrl');
 router.get('/', function(req, res, next) {
   res.render('landing', { title: 'Bienvenido a ' });
 });
+
+
 router.route('/vehiculos')
       .get(vehiculosCtrl.getVehiculos);
 
 router.route('/insertVehiculos')
-      .get();
+      .get(vehiculosCtrl.renderInsertVehiculo)
+      .post(vehiculosCtrl.insertNewVehiculo);
+router.route('/editVehiculo/:idVehiculo')
+      .get(vehiculosCtrl.renderEditVehiculo);
 
 module.exports = router;

@@ -1,4 +1,5 @@
 var request = require('request');
+var Vehiculo = require('../models/Vehiculo').model;
 var apiOptions = {
     server: 'http://localhost:3000'
 };
@@ -29,10 +30,40 @@ var vehiculos = (function(){
     });
  };
  var renderInsertVehiculo = function(req, res, next){
+        res.render('insertVehiculos', {
+            title:'Insertar nuevo vehiculo'
+        });
+ };
+ var renderEditVehiculo = function(req, res, next){
+    res.render('editVehiculo',{title:'Editar Vehiculo'});
+ };
+ var insertNewVehiculo = function(req, res, next){
+     Vehiculo.findOne({ descripcion: req.body.descripcion }, function (err, vh) {
+         if (vh !== null || vn !== undefined) {
+             return next(new Error("El usuario ya existe intente denuevo"));
+         }
+         var path = apiOptions.server + '/api/InsertVehiculos';
+         var requestOptions = {
+             url: path,
+             method: 'POST',
+             json: req.body
+         };
+         request(requestOptions, function (err, response, body) {
+             if (err) { return next(err); }
+             if (response.statusCode === 404) {
+                 res.render('error');
+             }
+             console.log(req.body);
+             res.redirect('/Vehiculos');
+         });
+        });
     
  };
  return {
-     getVehiculos: getVehiculos
+     getVehiculos: getVehiculos,
+     renderInsertVehiculo: renderInsertVehiculo,
+     insertNewVehiculo: insertNewVehiculo,
+     renderEditVehiculo: renderEditVehiculo
  };
 })();
 

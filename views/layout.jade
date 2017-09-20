@@ -3,26 +3,33 @@ html
   head
     title= title + " - Rent a car"
     link(rel='stylesheet', href='/lib/animate.css/animate.min.css')
-    link(rel="stylesheet", href="/lib/bootswatch/paper/bootstrap.min.css")
+    link(rel="stylesheet", href="/lib/bootswatch/yeti/bootstrap.min.css")
     link(rel="stylesheet", href="/lib/font-awesome/css/font-awesome.min.css")
     link(rel='stylesheet', href='/css/style.css')
     script(src="/lib/jquery/dist/jquery.min.js")
     script(src="/lib/bootstrap/dist/js/bootstrap.min.js")
 
   body
-    nav(class="navbar navbar-default navbar-fixed-top")
+    nav(class="navbar navbar-inverse navbar-fixed-top")
       div(class="container-fluid")
         div(class="navbar-header")
           button(type="button", class="navbar-toggle",data-toggle="collapse",data-target="#myNavbar")
             span(class="icon-bar")
             span(class="icon-bar")
             span(class="icon-bar")
-          a(href="/", class="navbar-brand") Rent a Car
+          a(href="/Vehiculos", class="navbar-brand") Rent a Car
         div(class="collapse navbar-collapse", id="myNavbar")
           ul(class="nav navbar-nav navbar-right")
             li
               a(href="/Vehiculos") Ver Vehiculos
-                
+    -if(errors != undefined || errors != null){
+          div(class="alert alert-danger alert-dismissable", role="alert")=errors
+            a(href="#",class="close",aria-label="close", data-dismiss="alert") &times;
+    -}
+    //- einfo in infos
+    //-   div(class="alert alert-info alert-dismissable", role="alert")=info
+    //-     a(href="#",class="close",aria-label="close") &times;
+
     block content
 
     script(src="/lib/vue/dist/vue.min.js")

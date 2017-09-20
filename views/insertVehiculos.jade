@@ -1,7 +1,62 @@
+extend layout
 block content
     div(id="app")
-        
+        div(class="row")
+            div(class="col-sm-6 col-sm-offset-3")
+                h2(class="text-center") Inserte un nuevo vehiculo
+                hr
+                form(class="form-horizontal", method="POST")
+                    div(class="form-group input-group")
+                        label(class="input-group-addon") Descripcion
+                        input(type="text",class="form-control", placeholder="escriba el nombre del vehiculo", name="descripcion")
 
+                    div(class="form-group input-group")
+                        label(class="input-group-addon") No Placa
+                        input(type="number", class="form-control", placeholder="Introduzca numero de placa", name="noPlaca")
+                    
+                    div(class="form-group input-group")
+                        label(class="input-group-addon") No Motor
+                        input(type="number", class="form-control", placeholder="Introduzca un numero de motor", name="noMotor")
+
+                    div(class="form-group input-group")
+                        label(class="input-group-addon") No Chasis
+                        input(type="number", class="form-control", placeholder="Introduzca un numero de chasis", name="noChasis")
+
+                    div(class="form-group input-group")
+                        label(class="input-group-addon") Tipo Vehiculo
+                        select(class="form-control", name="tipoVehiculo")
+                            option(selected,disabled, value="") Escoja una opcion
+                            option(v-for="tv in dependencies.tipoVehiculo", v-bind:value="tv.descripcion") {{tv.descripcion}}
+
+
+                    div(class="form-group input-group")
+                        label(class="input-group-addon") Marca
+                        select(class="form-control",v-model="marca")
+                            option(selected,disabled, value="") Escoja una opcion
+                            option(v-for="marca in dependencies.marcas",v-bind:value="marca") {{marca.descripcion}}
+                        input(type="hidden", v-model="marca.descripcion", name="marcaDesc")
+
+                    div(class="form-group input-group")
+                        label(class="input-group-addon") Modelo
+                        select(class="form-control", v-model="modelo", name="modelo")
+                            option(selected,disabled, value="") Escoja una opcion
+                            option(v-for="modelo in marca.modelo", v-bind:value="modelo.descripcion") {{modelo.descripcion}}
+
+                    div(class="form-group input-group")
+                        label(class="input-group-addon") Tipo Combustible
+                        select(class="form-control" name="tipoCombustible") 
+                            option(selected,disabled, value="") Escoja una opcion
+                            option(v-for="tipoCombustible in dependencies.tipoCombustibles", v-bind:value="tipoCombustible.descripcion") {{tipoCombustible.descripcion}}
+
+                    div(class="form-group input-group")
+                        label(class="input-group-addon") Estado
+                        select(class="form-control" name="estado") 
+                            option(selected,disabled, value="") Escoja una opcion
+                            option(v-for="estado in dependencies.estados", v-bind:value="estado.estado") {{estado.estado}}
+
+                    div(class="form-group")
+                        button(type="submit", class="btn btn-success") Insertar
+                        
 
 block scripts
     script(src="/js/insertvh.js")

@@ -5,5 +5,6 @@ var vehiculoCtrl = require('../controllers/VehiculosController');
 router.route('/Vehiculos')
       .get(vehiculoCtrl.getAllVehiculos);
 router.route('/insertVehiculos')
-      .get(vehiculoCtrl.insertVehiculos);
+      .get(vehiculoCtrl.insertVehiculos)
+      .post(vehiculoCtrl.insertNewVehiculo);
 module.exports = router;

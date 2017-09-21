@@ -1,11 +1,6 @@
 var request = require('request');
 var Vehiculo = require('../models/Vehiculo').model;
-var apiOptions = {
-    server: 'http://localhost:3000'
-};
-if (process.env.NODE_ENV === 'production') {
-    apiOptions.server = 'https://giamp-loc8r-gettingmean.herokuapp.com';
-}
+var apiOptions = require('../utils/serverLocation');
 /**
  * Controlador que determina todas las funciones concernientes a los vehiculos
  */
@@ -48,6 +43,7 @@ var vehiculos = (function(){
                 });
         return;
          }
+         
          var path = apiOptions.server + '/api/InsertVehiculos';
          var requestOptions = {
              url: path,

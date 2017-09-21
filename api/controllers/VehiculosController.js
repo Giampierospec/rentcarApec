@@ -23,18 +23,6 @@ var Ctrl = (function(){
             res.json(vehiculos);
         });
     };
-    var getAllTipoVehiculos = function(req, res, next){
-        TipoVehiculo.find({estado:'Activo'})
-        .exec(function(error, tipoVehiculos){
-            if(err){return next(error);}
-            if (req.status == 401) {
-                res.json({
-                    message: "Unauthorized"
-                });
-            }
-            res.json(tipoVehiculos);
-        });
-    };
     var getEditVehiculos = function(req, res, next){
         
         var dependencies = {
@@ -49,19 +37,19 @@ var Ctrl = (function(){
             if (err) { return next(err); }
             dependencies.vehiculo = vehiculo; 
         });
-        Marca.find({}).exec(function (err, marca) {
+        Marca.find({estado:'Activo'}).exec(function (err, marca) {
             if (err) { return next(err); }
             dependencies.marcas = marca;
         });
-        TipoCombustible.find({}).exec(function (err, tc) {
+        TipoCombustible.find({estado:'Activo'}).exec(function (err, tc) {
             if (err) { return next(err); }
             dependencies.tipoCombustibles = tc;
         });
-        TipoVehiculo.find({}).exec(function (err, tv) {
+        TipoVehiculo.find({estado:'Activo'}).exec(function (err, tv) {
             if (err) { return next(err); }
             dependencies.tipoVehiculo = tv;
         });
-        Estado.find({}).exec(function (err, estado) {
+        Estado.find({estado:'Activo'}).exec(function (err, estado) {
             if (err) { return next(err); }
             dependencies.estados = estado;
             res.json(dependencies);
@@ -156,15 +144,15 @@ var Ctrl = (function(){
             tipoVehiculo:[]
 
         };
-        Marca.find({}).exec(function(err, marca){
+        Marca.find({estado:'Activo'}).exec(function(err, marca){
             if(err){return next(err);}
             dependencies.marcas = marca;
         });
-        TipoCombustible.find({}).exec(function(err, tc){
+        TipoCombustible.find({estado:'Activo'}).exec(function(err, tc){
             if (err) { return next(err); }
             dependencies.tipoCombustibles = tc;
         });
-        TipoVehiculo.find({}).exec(function (err, tv) {
+        TipoVehiculo.find({estado:'Activo'}).exec(function (err, tv) {
             if(err){return next(err);}
             dependencies.tipoVehiculo = tv;
         });
@@ -242,7 +230,6 @@ var Ctrl = (function(){
 
     return {
         getAllVehiculos :getAllVehiculos,
-        getAllTipoVehiculos: getAllTipoVehiculos,
         insertVehiculos: insertVehiculos,
         insertNewVehiculo: insertNewVehiculo,
         getEditVehiculos: getEditVehiculos,

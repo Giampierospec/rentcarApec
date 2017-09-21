@@ -1,0 +1,27 @@
+extend layout
+
+block content
+    #app
+        .row
+            .col-sm-6.col-sm-offset-3
+                -if(errors)
+                    for error in errors
+                        span.text-danger=error
+                -if(error)
+                    span.text-danger=error
+                h2.text-center Insertar nuevo tipo vehiculo
+                hr
+                form(method="post").form-horizontal
+                    .form-group.input-group
+                        label.input-group-addon Nombre
+                        input(type="text", name="descripcion").form-control
+                    .form-group.input-group
+                        label.input-group-addon estado
+                        select(name="estado").form-control
+                            option(value="", selected, disabled) Escoja una opcion
+                            option(v-for="estado in dependencies.estado",v-bind:value="estado.estado"){{estado.estado}}
+                    .form-group
+                        button(type="submit").btn.btn-success Insertar
+                    
+block scripts
+    script(src="/js/tipoVehiculos/insertTp.js")                   

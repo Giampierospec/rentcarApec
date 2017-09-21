@@ -9,6 +9,7 @@ var bodyParser = require('body-parser');
 require('./Connection/dbConnection');
 var vehiculos = require('./routes/vehiculos');
 var users = require('./routes/users');
+var tipoVehiculos = require('./routes/tipoVehiculo');
 var api = require('./api/routes/apiRoutes');
 
 var app = express();
@@ -34,6 +35,7 @@ app.use(flash());
 
 app.use('/', vehiculos);
 app.use('/users', users);
+app.use('/tipoVehiculos',tipoVehiculos);
 app.use('/api',api);
 
 // catch 404 and forward to error handler

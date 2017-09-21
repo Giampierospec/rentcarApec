@@ -1,0 +1,24 @@
+extend layout
+
+block content
+    div.row
+        .col-sm-8.col-sm-offset-2
+            h2.text-center marcas de vehiculos activas
+            hr
+            a(href="/marcaVehiculo/Insertar").btn.btn-primary Insertar
+            br
+            br
+            table.table.table-responsive
+                thead
+                    tr
+                        th Marca
+                        th Estado
+                tbody
+                    -if(marcas)
+                        for marca in marcas
+                            tr
+                                td=marca.descripcion
+                                td=marca.estado
+                                td
+                                    a(href="/marcaVehiculo/Editar/"+marca._id).btn.btn-primary Editar
+

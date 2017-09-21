@@ -5,8 +5,11 @@ block content
             div(class="col-sm-6 col-sm-offset-3")
                 -if(errors){
                     for error in errors
-                        span.text-danger=error
+                        ul
+                            li.text-danger=error.msg
                 -}
+                -if(error)
+                    span.text-danger.text-center=error
                 
                 h2(class="text-center") Inserte un nuevo vehiculo
                 hr

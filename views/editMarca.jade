@@ -10,19 +10,21 @@ block content
                             li.text-danger=error.msg
                 -if(error)
                     span.text-danger=error
-                h2.text-center Insertar nuevo tipo vehiculo
+                h2.text-center Editar marca
+                    &nbsp;
+                    b {{dependencies.marca.descripcion}}
                 hr
                 form(method="post").form-horizontal
                     .form-group.input-group
                         label.input-group-addon Nombre
-                        input(type="text", name="descripcion").form-control
+                        input(type="text", name="descripcion", v-model="dependencies.marca.descripcion").form-control
                     .form-group.input-group
                         label.input-group-addon estado
-                        select(name="estado").form-control
+                        select(name="estado", v-model="dependencies.marca.estado").form-control
                             option(value="", selected, disabled) Escoja una opcion
                             option(v-for="estado in dependencies.estado",v-bind:value="estado.estado"){{estado.estado}}
                     .form-group
                         button(type="submit").btn.btn-success Insertar
                     
 block scripts
-    script(src="/js/tipoVehiculos/insertTp.js")                   
+    script(src="/js/marcas/editmr.js")                   

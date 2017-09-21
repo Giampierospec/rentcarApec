@@ -1,6 +1,6 @@
 (function () {
-    $.get('/api/InsertTipoVehiculo', function (dep) {
-        console.log(dep);
+    var url = window.location.href.split('/');
+    $.get('/api/editMarca/'+url[5], function (dep) {
         new Vue({
             el: '#app',
             data: {

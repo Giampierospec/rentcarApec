@@ -3,6 +3,7 @@ var express = require('express');
 var router = express.Router();
 var vehiculoCtrl = require('../controllers/VehiculosController');
 var tipoVehiculoCtrl = require('../controllers/tipoVehiculoControlller');
+var marcasCtrl = require('../controllers/marcaController');
 router.route('/Vehiculos')
       .get(vehiculoCtrl.getAllVehiculos);
 router.route('/insertVehiculos')
@@ -21,4 +22,17 @@ router.route('/InsertTipoVehiculo')
 router.route('/editTipoVehiculo/:tipoVehiculoId')
       .get(tipoVehiculoCtrl.getEditTipoVehiculo)
       .put(tipoVehiculoCtrl.editTipoVehiculo);
+
+//Marca vehiculos
+
+router.route('/marcas')
+      .get(marcasCtrl.getMarcasActivas);
+
+router.route('/InsertMarca')
+      .get(marcasCtrl.getInsertMarca)
+      .post(marcasCtrl.insertMarca);
+
+router.route('/editMarca/:marcaId')
+      .get(marcasCtrl.getEditMarca)
+      .put(marcasCtrl.editMarca);
 module.exports = router;

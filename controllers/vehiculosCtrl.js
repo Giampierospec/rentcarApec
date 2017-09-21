@@ -33,13 +33,34 @@ var vehiculos = (function(){
     res.render('editVehiculo',{title:'Editar Vehiculo'});
  };
  var insertNewVehiculo = function(req, res, next){
+     //Validaciones que no hayan dejado campos vacios
+     req.checkBody('descripcion','El campo descripcion es requerido').notEmpty();
+     req.checkBody('noPlaca', 'El campo placa es requerido').notEmpty();
+     req.checkBody('noMotor','El campo numero Motor es requerido').notEmpty();
+     req.checkBody('noChasis', 'El campo numero Chasis es requerido').notEmpty();
+     req.checkBody('tipoVehiculo', 'El campo tipo Vehiculo es requerido').notEmpty();
+     req.checkBody('marcaDesc','El campo marca es requerido').notEmpty();
+     req.checkBody('modelo', 'El campo modelo es requerido').notEmpty();
+     req.checkBody('tipoCombustible','El campo tipo Combustible es requerido').notEmpty();
+     req.checkBody('estado', 'El campo estado  es requerido').notEmpty();
+     
+     errors = req.validationErrors();
+     if(errors){
+         res.render('insertVehiculos',{
+             title: "Insertar nuevo vehiculo",
+             errors: errors
+         });
+         return;
+     }
+     else{
      Vehiculo.findOne({ descripcion: req.body.descripcion }, function (err, vh) {
-         if (vh !== null || vn !== undefined) {
-            var error = "El usuario ya existe intente denuevo";
+         if (vh) {
+             console.log(vh);
+            var error = new Error("El usuario ya existe intente denuevo");
             res.render('insertVehiculos',
                 {
                     title: "Insertar nuevo vehiculo",
-                    errors: error
+                    error: error.message
                 });
         return;
          }
@@ -59,7 +80,7 @@ var vehiculos = (function(){
              res.redirect('/Vehiculos');
          });
         });
-    
+    }
  };
 
  var editVehiculo = function(req, res, next){
@@ -69,6 +90,26 @@ var vehiculos = (function(){
         method: 'POST',
         json: req.body
     };
+    //Validaciones que no hayan dejado campos vacios
+    req.checkBody('descripcion', 'El campo descripcion es requerido').notEmpty();
+    req.checkBody('noPlaca', 'El campo placa es requerido').notEmpty();
+    req.checkBody('noMotor', 'El campo numero Motor es requerido').notEmpty();
+    req.checkBody('noChasis', 'El campo numero Chasis es requerido').notEmpty();
+    req.checkBody('tipoVehiculo', 'El campo tipo Vehiculo es requerido').notEmpty();
+    req.checkBody('marcaDesc', 'El campo marca es requerido').notEmpty();
+    req.checkBody('modelo', 'El campo modelo es requerido').notEmpty();
+    req.checkBody('tipoCombustible', 'El campo tipo Combustible es requerido').notEmpty();
+    req.checkBody('estado', 'El campo estado  es requerido').notEmpty();
+
+    errors = req.validationErrors();
+    if (errors) {
+        res.render('editVehiculo', {
+            title: "Editar Vehiculo",
+            errors: errors
+        });
+        return;
+    }
+    else {
     request(requestOptions, function(err, response, body){
         if (err) { return next(err); }
         if (response.statusCode === 404) {
@@ -77,6 +118,7 @@ var vehiculos = (function(){
         console.log(req.body);
         res.redirect('/Vehiculos');
     });
+}
  };
  return {
      getVehiculos: getVehiculos,

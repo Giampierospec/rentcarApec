@@ -38,9 +38,20 @@ var Ctrl = (function(){
             method:'POST',
             json: req.body
         };
+        req.bodyCheck('descripcion', 'El campo descripcion es requerido').notEmpty();
+        req.bodyCheck('estado', 'El campo estado es requerido').notEmpty();
+        var errors = req.validationErrors();
+        if (errors) {
+            res.render('insertTipoVehiculo', {
+                title: 'Insertar tipo de vehiculo',
+                errors: errors
+            });
+            return;
+        }
+        else {
         TipoVehiculo.findOne({descripcion:req.body.descripcion})
                     .exec(function(err, tv){
-                        if(tv !== null || tv !== undefined){
+                        if(tv){
                                 var error = new Error("El tipo de vehiculo ya existe");
                                 res.render('insertTipoVehiculo',{
                                     title: 'Insertar tipo de vehiculo',
@@ -57,8 +68,23 @@ var Ctrl = (function(){
                             res.redirect('/tipoVehiculos');
                         });
                     });
+                }
     };
     var EditTipoVehiculo = function(req, res, next){
+        req.bodyCheck('descripcion', 'El campo descripcion es requerido').notEmpty();
+        req.bodyCheck('estado', 'El campo estado es requerido').notEmpty();
+        var errors = req.validationErrors();
+        if(errors){
+            res.render('editTipoVehiculo',{
+                title:'Editar Vehiculo',
+                errors: errors
+            });
+            return ;
+        }
+        else{
+
+        
+
         var tipoVehiculoId = req.params.tipoVehiculoId;
         var path = apiOptions.server+'/api/editTipoVehiculo/'+tipoVehiculoId;
         var requestOptions = {
@@ -73,6 +99,7 @@ var Ctrl = (function(){
             }
             res.redirect('/tipoVehiculos');
         });
+    }
     };
     return {
         getTipoVehiculos: getTipoVehiculos,

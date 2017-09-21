@@ -1,4 +1,63 @@
 extend layout
-
 block content
-    
+    div(id="app")
+        div(class="row")
+            div(class="col-sm-6 col-sm-offset-3")
+                h2(class="text-center") Editar vehiculo No. &nbsp;
+                    b {{dependencies.vehiculo._id}}
+                hr
+                form(class="form-horizontal", method="POST")
+                    div(class="form-group input-group")
+                        label(class="input-group-addon") Descripcion
+                        input(type="text",class="form-control", placeholder="escriba el nombre del vehiculo", name="descripcion", v-model="dependencies.vehiculo.descripcion")
+
+                    div(class="form-group input-group")
+                        label(class="input-group-addon") No Placa
+                        input(type="number", class="form-control", placeholder="Introduzca numero de placa", name="noPlaca", v-model="dependencies.vehiculo.noPlaca")
+                    
+                    div(class="form-group input-group")
+                        label(class="input-group-addon") No Motor
+                        input(type="number", class="form-control", placeholder="Introduzca un numero de motor", name="noMotor", v-model="dependencies.vehiculo.noMotor")
+
+                    div(class="form-group input-group")
+                        label(class="input-group-addon") No Chasis
+                        input(type="number", class="form-control", placeholder="Introduzca un numero de chasis", name="noChasis", v-model="dependencies.vehiculo.noChasis")
+
+                    div(class="form-group input-group")
+                        label(class="input-group-addon") Tipo Vehiculo
+                        select(class="form-control", name="tipoVehiculo", v-model="dependencies.vehiculo.tipoVehiculo")
+                            option(selected,disabled, value="") Escoja una opcion
+                            option(v-for="tv in dependencies.tipoVehiculo", v-bind:value="tv.descripcion") {{tv.descripcion}}
+
+
+                    div(class="form-group input-group")
+                        label(class="input-group-addon") Marca
+                        select(class="form-control",v-model="dependencies.vehiculo.marca")
+                            option(disabled, value="") Escoja una opcion
+                            option(v-for="marca in dependencies.marcas",v-bind:value="marca") {{marca.descripcion}}
+                        input(type="hidden", v-model="dependencies.vehiculo.marca.descripcion", name="marcaDesc")
+
+                    div(class="form-group input-group")
+                        label(class="input-group-addon") Modelo
+                        select(class="form-control", v-model="modelo", name="modelo")
+                            option(disabled, value="") Escoja una opcion
+                            option(v-for="modelo in dependencies.vehiculo.marca.modelo", v-bind:value="modelo.descripcion") {{modelo.descripcion}}
+
+                    div(class="form-group input-group")
+                        label(class="input-group-addon") Tipo Combustible
+                        select(class="form-control" name="tipoCombustible", v-model="dependencies.vehiculo.tipoCombustible") 
+                            option(selected,disabled, value="") Escoja una opcion
+                            option(v-for="tipoCombustible in dependencies.tipoCombustibles", v-bind:value="tipoCombustible.descripcion") {{tipoCombustible.descripcion}}
+
+                    div(class="form-group input-group")
+                        label(class="input-group-addon") Estado
+                        select(class="form-control" name="estado" v-model="dependencies.vehiculo.estado") 
+                            option(selected,disabled, value="") Escoja una opcion
+                            option(v-for="estado in dependencies.estados", v-bind:value="estado.estado") {{estado.estado}}
+
+                    div(class="form-group")
+                        button(type="submit", class="btn btn-primarys") Editar
+                        
+
+block scripts
+    script(src="/js/editvh.js")

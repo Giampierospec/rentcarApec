@@ -40,7 +40,13 @@ var vehiculos = (function(){
  var insertNewVehiculo = function(req, res, next){
      Vehiculo.findOne({ descripcion: req.body.descripcion }, function (err, vh) {
          if (vh !== null || vn !== undefined) {
-             return next(new Error("El usuario ya existe intente denuevo"));
+            var error = "El usuario ya existe intente denuevo";
+            res.render('insertVehiculos',
+                {
+                    title: "Insertar nuevo vehiculo",
+                    errors: error
+                });
+        return;
          }
          var path = apiOptions.server + '/api/InsertVehiculos';
          var requestOptions = {
@@ -59,11 +65,29 @@ var vehiculos = (function(){
         });
     
  };
+
+ var editVehiculo = function(req, res, next){
+    var path = apiOptions.server + '/api/editVehiculo/'+req.params.idVehiculo;
+    var requestOptions ={
+        url: path,
+        method: 'POST',
+        json: req.body
+    };
+    request(requestOptions, function(err, response, body){
+        if (err) { return next(err); }
+        if (response.statusCode === 404) {
+            res.render('error');
+        }
+        console.log(req.body);
+        res.redirect('/Vehiculos');
+    });
+ };
  return {
      getVehiculos: getVehiculos,
      renderInsertVehiculo: renderInsertVehiculo,
      insertNewVehiculo: insertNewVehiculo,
-     renderEditVehiculo: renderEditVehiculo
+     renderEditVehiculo: renderEditVehiculo,
+     editVehiculo: editVehiculo
  };
 })();
 

@@ -3,6 +3,11 @@ block content
     div(id="app")
         div(class="row")
             div(class="col-sm-6 col-sm-offset-3")
+                -if(errors){
+                    for error in errors
+                        span.text-danger=error
+                -}
+                
                 h2(class="text-center") Inserte un nuevo vehiculo
                 hr
                 form(class="form-horizontal", method="POST")

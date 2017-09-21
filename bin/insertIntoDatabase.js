@@ -57,9 +57,9 @@ var data={
     vehiculo:[
         {
             descripcion:"Rojo",
-            noChasis:Math.random() * 10000,
-            noMotor:Math.random() * 10000,
-            noPlaca: Math.random() * 10000
+            noChasis:Math.floor(Math.random() * 10000),
+            noMotor: Math.floor(Math.random() * 10000),
+            noPlaca: Math.floor(Math.random() * 10000)
 
         }
 

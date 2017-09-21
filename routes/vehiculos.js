@@ -16,6 +16,7 @@ router.route('/insertVehiculos')
       .get(vehiculosCtrl.renderInsertVehiculo)
       .post(vehiculosCtrl.insertNewVehiculo);
 router.route('/editVehiculo/:idVehiculo')
-      .get(vehiculosCtrl.renderEditVehiculo);
+      .get(vehiculosCtrl.renderEditVehiculo)
+      .post(vehiculosCtrl.editVehiculo);
 
 module.exports = router;

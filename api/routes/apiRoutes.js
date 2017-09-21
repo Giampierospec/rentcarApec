@@ -7,4 +7,7 @@ router.route('/Vehiculos')
 router.route('/insertVehiculos')
       .get(vehiculoCtrl.insertVehiculos)
       .post(vehiculoCtrl.insertNewVehiculo);
+router.route('/editVehiculo/:idVehiculo')
+      .get(vehiculoCtrl.getEditVehiculos)
+      .post(vehiculoCtrl.editVehiculos);
 module.exports = router;

@@ -25,7 +25,11 @@ var Ctrl = (function(){
         res.render('insertTipoVehiculo',{
             title:'Insertar tipo de vehiculo'
         });
-
+    };
+    var renderEditTipoVehiculos = function (req, res, next) {
+        res.render('editTipoVehiculo', {
+            title: 'Editar Vehiculo'
+        });
     };
     var InsertTipoVehiculo = function(req, res, next){
         var path = apiOptions.server +'/api/InsertTipoVehiculo/';
@@ -54,10 +58,28 @@ var Ctrl = (function(){
                         });
                     });
     };
+    var EditTipoVehiculo = function(req, res, next){
+        var tipoVehiculoId = req.params.tipoVehiculoId;
+        var path = apiOptions.server+'/api/editTipoVehiculo/'+tipoVehiculoId;
+        var requestOptions = {
+            url: path,
+            method:'PUT',
+            json: req.body
+        };
+        request(requestOptions,function(err, response, body){
+            if(err){return next(err);}
+            if(response.statusCode === 500){
+                return next(err);
+            }
+            res.redirect('/tipoVehiculos');
+        });
+    };
     return {
         getTipoVehiculos: getTipoVehiculos,
         renderInsertTipoVehiculos: renderInsertTipoVehiculos,
-        insertTipoVehiculo: InsertTipoVehiculo
+        insertTipoVehiculo: InsertTipoVehiculo,
+        renderEditTipoVehiculos: renderEditTipoVehiculos,
+        EditTipoVehiculo: EditTipoVehiculo
     };
 
 })();

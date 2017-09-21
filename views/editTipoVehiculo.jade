@@ -1,0 +1,28 @@
+extend layout
+
+block content
+    #app
+        .row
+            .col-sm-6.col-sm-offset-3
+                -if(errors)
+                    for error in errors
+                        span.text-danger=error
+                -if(error)
+                    span.text-danger=error
+                h2.text-center Editar tipo vehiculo
+                    b {{dependencies.tipoVehiculo.descripcion}}
+                hr
+                form(method="post").form-horizontal
+                    .form-group.input-group
+                        label.input-group-addon Nombre
+                        input(type="text", name="descripcion", v-model="dependencies.tipoVehiculo.descripcion").form-control
+                    .form-group.input-group
+                        label.input-group-addon estado
+                        select(name="estado",v-model="dependencies.tipoVehiculo.estado").form-control
+                                option(value="", selected, disabled) Escoja una opcion
+                                option(v-for="estado in dependencies.estado",v-bind:value="estado.estado"){{estado.estado}}
+                    .form-group
+                        button(type="submit").btn.btn-success Editar
+                    
+block scripts
+    script(src="/js/tipoVehiculos/editTp.js")                   

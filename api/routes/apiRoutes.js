@@ -4,6 +4,16 @@ var router = express.Router();
 var vehiculoCtrl = require('../controllers/VehiculosController');
 var tipoVehiculoCtrl = require('../controllers/tipoVehiculoControlller');
 var marcasCtrl = require('../controllers/marcaController');
+
+var userCtrl = require('../controllers/usersController');
+
+//Usuarios
+
+router.route('/Users')
+      .get(userCtrl.getEstados)
+      .post(userCtrl.insertNewEmpleado);
+
+//Vehiculos
 router.route('/Vehiculos')
       .get(vehiculoCtrl.getAllVehiculos);
 router.route('/insertVehiculos')

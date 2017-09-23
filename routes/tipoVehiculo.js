@@ -1,13 +1,14 @@
 var express = require('express');
 var router = express.Router();
 var tpCtrl = require('../controllers/tipoVehiculoCtr');
+var authCtrl = require('../controllers/authController');
 router.route('/')
-    .get(tpCtrl.getTipoVehiculos);
+    .get(authCtrl.ensureIsAuthenticated,tpCtrl.getTipoVehiculos);
 
 router.route('/Insertar')
-        .get(tpCtrl.renderInsertTipoVehiculos)
+        .get(authCtrl.ensureIsAuthenticated, tpCtrl.renderInsertTipoVehiculos)
         .post(tpCtrl.insertTipoVehiculo);
 router.route('/Editar/:tipoVehiculoId')
-        .get(tpCtrl.renderEditTipoVehiculos)
+        .get(authCtrl.ensureIsAuthenticated, tpCtrl.renderEditTipoVehiculos)
         .post(tpCtrl.EditTipoVehiculo);
 module.exports = router;

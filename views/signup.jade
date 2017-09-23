@@ -1,0 +1,58 @@
+extends shared/landingLayout 
+
+block content
+    #app
+        .row
+            div(class="col-sm-8 col-sm-offset-2")
+                    div(class="jumbotron text-center jb-landing")
+                        h2 Ingrese un nuevo empleado
+                        hr
+                        -if(errors)
+                            for error in errors
+                                ul
+                                    li.text-danger=error.msg
+                        -if(error)
+                            span.text-danger=error
+
+                        .row
+                            .col-sm-6.col-sm-offset-3
+                                form(method="post").form-horizontal
+                                    .form-group.input-group
+                                        label.input-group-addon
+                                            i.fa.fa-envelope
+                                        input(type="email",name="email", placeholder="introduzca un email valido").form-control
+                                    .form-group.input-group
+                                        label.input-group-addon
+                                            i.fa.fa-lock
+                                        input(type="password", name="password", placeholder="introduzca una contraseña").form-control
+                                    .form-group.input-group
+                                        label.input-group-addon
+                                            i.fa.fa-user
+                                        input(type="text", name="nombre", placeholder="introduzca un nombre").form-control
+
+                                    .form-group.input-group
+                                        label.input-group-addon
+                                            i.fa.fa-id-card
+                                        input(type="text", name="cedula" id="cedula", placeholder="introduzca una cedula").form-control
+
+                                    .form-group.input-group
+                                        label.input-group-addon
+                                            i.fa.fa-calendar-times-o
+                                        input(type="text", name="tanda", placeholder="Introduzca una tanda de labor").form-control    
+
+                                    .form-group.input-group
+                                        label.input-group-addon
+                                            i.fa.fa-calendar
+                                        input(type="date", name="fI", placeholder="Introduzca la fecha de ingresos").form-control  
+                                    .form-group.input-group
+                                        label.input-group-addon
+                                            i.fa.fa-bars
+                                        select(name="estado").form-control
+                                            option(value="", disabled, selected) Escoja una opcion
+                                            option(v-for="estado in dependencies" v:bind-value="estado.estado") {{estado.estado}}
+                                    .form-group
+                                        button(type="submit").btn.btn-success Insertar
+                        a(href="/auth/login")
+                                i.text-center ¿Tienes cuenta? ingresa aquí
+block scripts
+    script(src="/js/users/insertUsers.js")

@@ -2,15 +2,15 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
 var RentaSchema = new Schema({
-empleado:{type:Schema.Types.ObjectId, ref:'Empleado'},
-vehiculo:{type:Schema.Types.ObjectId, ref:'Vehiculo'},
-cliente: {type:Schema.Types.ObjectId, ref:'Cliente'},
+empleado:{type:String},
+vehiculo:{type:String},
+cliente: {type:String},
 fechaRenta: Date,
 fechaDevolucion: Date,
 montoxDia: Number,
 cantidadDeDias: Number,
 comentario:String,
-estado:{type:Schema.Types.ObjectId, ref:'Estado'}
+estado:{type:String}
 });
 
 var Renta = {

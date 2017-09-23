@@ -1,0 +1,30 @@
+extends shared/landingLayout 
+
+block content 
+    .row
+        div(class="col-sm-8 col-sm-offset-2")
+                div(class="jumbotron text-center jb-landing")
+                    h2 Ingrese sus credenciales
+                    hr
+                    -if(errors)
+                            for error in errors
+                                ul
+                                    li.text-danger=error.msg
+                        -if(error)
+                            span.text-danger=error
+                    .row
+                        .col-sm-6.col-sm-offset-3
+                            form(method="post").form-horizontal
+                                .form-group.input-group
+                                        label.input-group-addon
+                                            i.fa.fa-envelope
+                                        input(type="email",name="email", placeholder="introduzca un email valido").form-control
+                                .form-group.input-group
+                                        label.input-group-addon
+                                            i.fa.fa-lock
+                                        input(type="password", name="password", placeholder="introduzca una contraseña").form-control
+                                .form-group
+                                    button(type="submit").btn.btn-primary Ingresar
+
+                    a(href="/auth/signup")
+                        i.text-center si no tiene cuenta ingrese aqui

@@ -17,27 +17,7 @@ var EmpleadoSchema = new Schema({
     renta: [Renta],
     inspeccion: [Inspeccion]
 });
-var noop = function () { };
 
-EmpleadoSchema.pre('save', function (done) {
-    var user = this;
-    if (!user.isModified('password')) {
-        return done();
-    }
-    bcrypt.genSalt(8, function (err, salt) {
-        if (err) { return done(err); }
-        bcrypt.hash(user.password, salt, noop, function (err, hashedPassword) {
-            if (err) { return done(err); }
-            user.password = hashedPassword;
-            done();
-        });
-    });
-});
-EmpleadoSchema.methods.validPassword = function(guess, done){
-    bcrypt.compare(guess, this.password, function (err, isMatch) {
-        done(err, isMatch);
-    });
-};
 var Empleado = {
     schema: EmpleadoSchema,
     model: mongoose.model('Empleado', EmpleadoSchema)

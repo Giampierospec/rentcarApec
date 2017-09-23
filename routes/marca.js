@@ -6,11 +6,11 @@ var authCtrl = require('../controllers/authController');
 router.route('/')
       .get(authCtrl.ensureIsAuthenticated,marcaCtrl.getAllMarcas);
 router.route('/Insertar')
-        .get(authCtrl.ensureIsAuthenticated, marcaCtrl.renderInsertMarca)
+        .get(authCtrl.ensureIsAuthenticated,authCtrl.checkUserEmpleadoAdmin ,marcaCtrl.renderInsertMarca)
         .post(marcaCtrl.insertMarca);
 
 router.route('/Editar/:marcaId')
-        .get(authCtrl.ensureIsAuthenticated, marcaCtrl.renderEditMarca)
+        .get(authCtrl.ensureIsAuthenticated,authCtrl.checkUserEmpleadoAdmin ,marcaCtrl.renderEditMarca)
         .post(marcaCtrl.editMarca);
 
 

@@ -5,44 +5,51 @@ var vehiculoCtrl = require('../controllers/VehiculosController');
 var tipoVehiculoCtrl = require('../controllers/tipoVehiculoControlller');
 var marcasCtrl = require('../controllers/marcaController');
 
-var userCtrl = require('../controllers/usersController');
+var empleadoCtrl = require('../controllers/EmpleadoController');
 
-//Usuarios
+var UserCtrl = require('../controllers/UsersController');
 
+var authCtrl = require("../../controllers/authController");
+//User
 router.route('/Users')
-      .get(userCtrl.getEstados)
-      .post(userCtrl.insertNewEmpleado);
+      .get(authCtrl.ensureIsAuthenticated,UserCtrl.getUsers)
+      .post(authCtrl.ensureIsAuthenticated,UserCtrl.insertUser);
+//Empleados
+
+router.route('/Empleados')
+      .get(authCtrl.ensureIsAuthenticated,empleadoCtrl.getEstados)
+      .post(authCtrl.ensureIsAuthenticated,empleadoCtrl.insertNewEmpleado);
 
 //Vehiculos
 router.route('/Vehiculos')
       .get(vehiculoCtrl.getAllVehiculos);
 router.route('/insertVehiculos')
-      .get(vehiculoCtrl.insertVehiculos)
-      .post(vehiculoCtrl.insertNewVehiculo);
+      .get(authCtrl.ensureIsAuthenticated,vehiculoCtrl.insertVehiculos)
+      .post(authCtrl.ensureIsAuthenticated,vehiculoCtrl.insertNewVehiculo);
 router.route('/editVehiculo/:idVehiculo')
-      .get(vehiculoCtrl.getEditVehiculos)
-      .post(vehiculoCtrl.editVehiculos);
+      .get(authCtrl.ensureIsAuthenticated,vehiculoCtrl.getEditVehiculos)
+      .post(authCtrl.ensureIsAuthenticated,vehiculoCtrl.editVehiculos);
 //Tipo vehiculos
 router.route('/getAllTipoVehiculos')
-      .get(tipoVehiculoCtrl.getAllTipoVehiculos);
+      .get(authCtrl.ensureIsAuthenticated,tipoVehiculoCtrl.getAllTipoVehiculos);
 router.route('/InsertTipoVehiculo')
-      .get(tipoVehiculoCtrl.getInsertTipoVehiculo)
-      .post(tipoVehiculoCtrl.insertNewTipoVehiculo);
+      .get(authCtrl.ensureIsAuthenticated,tipoVehiculoCtrl.getInsertTipoVehiculo)
+      .post(authCtrl.ensureIsAuthenticated,tipoVehiculoCtrl.insertNewTipoVehiculo);
 
 router.route('/editTipoVehiculo/:tipoVehiculoId')
-      .get(tipoVehiculoCtrl.getEditTipoVehiculo)
-      .put(tipoVehiculoCtrl.editTipoVehiculo);
+      .get(authCtrl.ensureIsAuthenticated, tipoVehiculoCtrl.getEditTipoVehiculo)
+      .put(authCtrl.ensureIsAuthenticated, tipoVehiculoCtrl.editTipoVehiculo);
 
 //Marca vehiculos
 
 router.route('/marcas')
-      .get(marcasCtrl.getMarcasActivas);
+      .get(authCtrl.ensureIsAuthenticated, marcasCtrl.getMarcasActivas);
 
 router.route('/InsertMarca')
-      .get(marcasCtrl.getInsertMarca)
-      .post(marcasCtrl.insertMarca);
+      .get(authCtrl.ensureIsAuthenticated, marcasCtrl.getInsertMarca)
+      .post(authCtrl.ensureIsAuthenticated, marcasCtrl.insertMarca);
 
 router.route('/editMarca/:marcaId')
-      .get(marcasCtrl.getEditMarca)
-      .put(marcasCtrl.editMarca);
+      .get(authCtrl.ensureIsAuthenticated,marcasCtrl.getEditMarca)
+      .put(authCtrl.ensureIsAuthenticated,marcasCtrl.editMarca);
 module.exports = router;

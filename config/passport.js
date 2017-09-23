@@ -1,6 +1,6 @@
 var LocalStrategy = require('passport-local').Strategy;
 
-var Empleado = require('../models/Empleado').model;
+var User = require('../models/User');
 var passport = require('passport');
 module.exports = function(){
     
@@ -9,7 +9,7 @@ module.exports = function(){
     });
 
     passport.deserializeUser((id, done)=>{
-        Empleado.findById(id)
+        User.findById(id)
                 .exec(function(err, user){
                     done(err, user);
                 });
@@ -20,7 +20,7 @@ module.exports = function(){
         passwordField: 'password',
         passReqToCallback: true
     }, function(req, username, password, done){
-        Empleado.findOne({email:username})
+        User.findOne({email:username})
                 .exec((err, user) =>{
                     if(err){
                         return done(err);

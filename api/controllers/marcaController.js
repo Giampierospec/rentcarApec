@@ -14,7 +14,7 @@ var Ctrl = (function(){
         var dependencies = {
             estado: []
         };
-        Estado.find({})
+        Estado.find({estado:['Activo','Inactivo']})
             .select("estado")
             .exec(function (err, estado) {
                 if (err) { return next(err); }
@@ -56,7 +56,7 @@ var Ctrl = (function(){
                 if(err){return next(err);}
                 dependencies.marca = marca;
             });
-        Estado.find({})
+        Estado.find({estado:['Activo','Inactivo']})
             .select("estado")
             .exec(function (err, estado) {
                 if (err) { return next(err); }

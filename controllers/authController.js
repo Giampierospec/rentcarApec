@@ -1,4 +1,4 @@
-var Empleado = require('../models/Empleado').model;
+var User = require('../models/User');
 var passport = require('passport');
 var apiOptions = require('../utils/serverLocation');
 var request = require('request');
@@ -49,6 +49,28 @@ var Ctrl = (function(){
         res.render('signup',{title:'Crear usuario'});
 
     };
+    var checkUserEmpleadoAdmin = function(req, res, next){
+        if(req.user.tipo ==='admin' || req.user.tipo ==='empleado'){
+            return next();
+        }
+        else{
+            res.render('noTieneAcceso',{
+                title:'No tiene acceso'
+            });
+            return;
+        }
+    };
+    var checkAdmin = function(req, res, next){
+        if (req.user.tipo === 'admin') {
+            return next();
+        }
+        else {
+            res.render('noTieneAcceso', {
+                title: 'No tiene acceso'
+            });
+            return;
+        }
+    };
     var signup = function(req, res, next){
         var path = apiOptions.server+'/api/Users';
         var requestOptions ={
@@ -58,10 +80,7 @@ var Ctrl = (function(){
         };
         req.checkBody('email','El email es requerido').notEmpty();
         req.checkBody('password','la contraseña es requerida').notEmpty();
-        req.checkBody('nombre','El nombre es requerido').notEmpty();
-        req.checkBody('cedula','La cedula es requerida').notEmpty();
-        req.checkBody('tanda','La tanda de labores es requerida').notEmpty();
-        req.checkBody('estado','el estado es requerido').notEmpty();
+        req.checkBody('tipo','El nombre es requerido').notEmpty();
         var errors = req.validationErrors();
         if(errors){
             res.render('signup',
@@ -72,13 +91,13 @@ var Ctrl = (function(){
             return;
         }
         else {
-            Empleado.findOne({ username: req.body.username })
-                .exec((err, empleado) => {
+            User.findOne({ email: req.body.email })
+                .exec((err, user) => {
                     if(err){
                         return next(err);
                     }
                     if (empleado){
-                        var error = new Error('El empleado ya existe');
+                        var error = new Error('El Usuario ya existe');
                         res.render('signup',
                             {
                                 title: 'Crear usuario',
@@ -114,7 +133,9 @@ var Ctrl = (function(){
         passportRedirect: passportRedirect,
         renderLogin: renderLogin,
         loginCheck: loginCheck,
-        logout: logout
+        logout: logout,
+        checkUserEmpleadoAdmin: checkUserEmpleadoAdmin,
+        checkAdmin: checkAdmin
     };
     
 })();

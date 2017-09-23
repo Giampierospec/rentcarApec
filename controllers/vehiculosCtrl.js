@@ -53,10 +53,10 @@ var vehiculos = (function(){
          return;
      }
      else{
-     Vehiculo.findOne({ descripcion: req.body.descripcion }, function (err, vh) {
+     Vehiculo.findOne({ noChasis: req.body.noChasis }, function (err, vh) {
          if (vh) {
              console.log(vh);
-            var error = new Error("El usuario ya existe intente denuevo");
+            var error = new Error("El vehiculo ya existe intente denuevo");
             res.render('insertVehiculos',
                 {
                     title: "Insertar nuevo vehiculo",

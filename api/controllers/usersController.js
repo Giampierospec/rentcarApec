@@ -1,57 +1,39 @@
 var mongoose = require('mongoose');
-var Empleado = mongoose.model('Empleado');
-var Estado = mongoose.model('Estado');
+
+var User = mongoose.model('User');
+
+
 var Ctrl = (function(){
-    var getEstados = function(req, res, next){
-        Estado.find({estado:['Activo','Inactivo']})
-              .select("estado")
-              .exec((err, estado) =>{
-                  if(err){return next(err);}
-                  res.json(estado);
-              });
-    };
-    var insertNewEmpleado = function(req, res, next){
-        var empleado = new Empleado({
-            email: req.body.email,
+
+    var insertUser = function(req, res, next){
+        var user = new User({
+            email:req.body.email,
             password: req.body.password,
-            nombre: req.body.nombre,
-            cedula: req.body.cedula,
-            tandaLabor: req.body.tanda,
-            fechaIngreso: req.body.fI,
-            estado: req.body.estado,
+            tipo: req.body.tipo
         });
-        empleado.save(function(err){
-            if(err){
-                return next(err);
-            }
-            console.log(empleado);
+        user.save(function(err){
+            if(err){return next(err);}
+            console.log(user);
+            req.statusCode = 200;
+            res.json({
+                status: req.statusCode,
+                usr: user
+            });
+            return;
         });
-        Estado.findOne({estado:empleado.estado})
-                .exec(function(err, estado){
-                    if(err){
-                        return next(err);
-                    }
-                    estado.empleado.push(empleado);
-                    estado.save(function(err){
-                        if(err){
-                            return next(err);
-                        }
-                        console.log(estado);
-                        req.statusCode = 200;
-                        res.json({
-                            user: empleado,
-                            status: req.statusCode
-                        });
-                        return;
-                    });
-
-                });
-
+    };
+    var getUsers = function(req, res, next){
+        User.find({})
+            .exec((err, user) =>{
+                if(err){return next(err);}
+                res.json(user);
+            });
     };
     return {
-        insertNewEmpleado: insertNewEmpleado,
-        getEstados: getEstados
+        insertUser: insertUser,
+        getUsers: getUsers
     };
+
 })();
 
 

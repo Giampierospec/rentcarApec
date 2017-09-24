@@ -55,7 +55,7 @@ block content
 
                     div(class="form-group input-group")
                         label(class="input-group-addon") Estado
-                        select(class="form-control" name="estado" v-model="dependencies.vehiculo.estado") 
+                        select(class="form-control", name="estado", v-model="dependencies.vehiculo.estado") 
                             option(selected,disabled, value="") Escoja una opcion
                             option(v-for="estado in dependencies.estados", v-bind:value="estado.estado") {{estado.estado}}
 

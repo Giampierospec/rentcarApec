@@ -1,0 +1,34 @@
+extends shared/layout
+
+block content
+    #app
+        .row
+            .col-sm-6.col-sm-offset-3
+                -if(errors)
+                    for error in errors
+                        ul
+                            li.text-danger=error.msg
+                -if(error)
+                    span.text-danger=error
+                h2.text-center Editar Modelo
+                    b &nbsp; {{dependencies.modelo.descripcion}}
+                hr
+                form(method="post").form-horizontal
+                    .form-group.input-group
+                        label.input-group-addon Nombre
+                        input(type="text", name="descripcion", v-model="dependencies.modelo.descripcion").form-control
+                    .form-group.input-group
+                        label.input-group-addon estado
+                        select(name="estado").form-control
+                            option(value="", selected, disabled, v-model="dependencies.modelo.estado") Escoja una opcion
+                            option(v-for="estado in dependencies.estados",v-bind:value="estado.estado"){{estado.estado}}
+                    .form-group.input-group
+                        label.input-group-addon Marca
+                        select(name="marca").form-control
+                            option(value="", selected, disabled, v-model="dependencies.modelo.marca") Escoja una opcion
+                            option(v-for="marca in dependencies.marcas",v-bind:value="marca.descripcion"){{marca.descripcion}}
+                    .form-group
+                        button(type="submit").btn.btn-success Editar
+                    
+block scripts
+    script(src="/js/modelos/editMd.js")                   

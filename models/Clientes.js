@@ -5,6 +5,8 @@ var Schema = mongoose.Schema;
 var Renta = require('../models/Renta').schema;
 var Inspeccion = require('../models/Inspeccion').schema;
 var ClientesSchema = new Schema({
+    email:{type:String},
+    password:{type:String},
     cedula:{type:String},
     nombre:{type:String},
     noTarjetaCR:{type:Number},

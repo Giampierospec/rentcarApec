@@ -1,0 +1,25 @@
+extends shared/layout
+
+block content
+  div(class="row")
+    div(class="col-sm-8 col-sm-offset-2")
+      h2(class="text-center") Modelos
+      a(href="/modeloVehiculo/Insertar", class="btn btn-primary") Insertar
+      br
+      br
+      table(class="table table-responsive")
+        thead
+          tr
+            th Modelo
+            th Marca
+            th Estado
+        tbody
+          -for(var i = 0; i < data.length; i++){
+          tr
+            td= data[i].descripcion
+            td=data[i].marca
+            td=data[i].estado
+            td 
+              a(href="/ModeloVehiculo/Editar/"+data[i]._id).btn.btn-primary Editar
+          -}
+

@@ -49,7 +49,7 @@ var Ctrl = (function(){
             if (err) { return next(err); }
             dependencies.tipoVehiculo = tv;
         });
-        Estado.find({estado:'Activo'}).exec(function (err, estado) {
+        Estado.find({}).exec(function (err, estado) {
             if (err) { return next(err); }
             dependencies.estados = estado;
             res.json(dependencies);
@@ -85,6 +85,17 @@ var Ctrl = (function(){
                     })
                     .exec(function(err, tv){
                         if(err){return next(err);}
+                        if(!tv){
+                            TipoVehiculo.findOne({descripcion:vehiculo.tipoVehiculo})
+                            .exec(function(err, tv){
+                                if(err){return next(err);}
+                                tv.vehiculo.push(vehiculo);
+                                tv.save(function (err) {
+                                    if (err) { return next(err); }
+                                });
+                            });
+                            
+                        }
                         console.log(tv);
                     });
 
@@ -96,6 +107,17 @@ var Ctrl = (function(){
                         })
                         .exec(function (err, mr) {
                             if (err) { return next(err); }
+                            if(!mr){
+                                Marca.findOne({ descripcion: vehiculo.marca })
+                                    .exec(function (err, mr) {
+                                        if (err) { return next(err); }
+                                        mr.vehiculo.push(vehiculo);
+                                        mr.save(function (err) {
+                                            if (err) { return next(err); }
+                                        });
+                                    });
+                                
+                            }
                             console.log(mr);
                         });
                     
@@ -107,6 +129,17 @@ var Ctrl = (function(){
                         })
                         .exec(function (err, md) {
                             if (err) { return next(err); }
+                            if(!md){
+                                Modelo.findOne({ descripcion: vehiculo.modelo })
+                                    .exec(function (err, md) {
+                                        if (err) { return next(err); }
+                                        md.vehiculo.push(vehiculo);
+                                        md.save(function (err) {
+                                            if (err) { return next(err); }
+                                        });
+                                    });
+                               
+                            }
                             console.log(md);
                         });
                     TipoCombustible.findOneAndUpdate({ descripcion: vehiculo.tipoCombustible, "vehiculo._id": vehiculoId },
@@ -117,6 +150,16 @@ var Ctrl = (function(){
                         })
                         .exec(function (err, tc) {
                             if (err) { return next(err); }
+                            if(!tc){
+                                TipoCombustible.findOne({ descripcion: vehiculo.marca })
+                                    .exec(function (err, tc) {
+                                        if (err) { return next(err); }
+                                        tc.vehiculo.push(vehiculo);
+                                        tc.save(function(err){
+                                            if(err){return next(err);}
+                                        });
+                                    });
+                            }
                             console.log(tc);
                         });
                     Estado.findOneAndUpdate({ estado: vehiculo.estado, "vehiculo._id": vehiculoId },
@@ -128,10 +171,21 @@ var Ctrl = (function(){
                         .exec(function (err, estado) {
                             if (err) { return next(err); }
                             console.log(estado);
+                            if(!estado){
+                                Estado.findOne({ estado: vehiculo.estado })
+                                    .exec(function (err, estado) {
+                                        if (err) { return next(err); }
+                                        estado.vehiculo.push(vehiculo);
+                                        estado.save(function (err) {
+                                            if (err) { return next(err); }
+                                        });
+                                    });
+                            }
                             res.json({
                                 message: "updated",
                                 status: req.statusCode
                             });
+                            return;
                         });
 
                 });

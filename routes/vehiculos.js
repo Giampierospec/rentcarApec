@@ -14,10 +14,10 @@ router.route('/vehiculos')
       .get(authCtrl.ensureIsAuthenticated,vehiculosCtrl.getVehiculos);
 
 router.route('/insertVehiculos')
-      .get(authCtrl.ensureIsAuthenticated,vehiculosCtrl.renderInsertVehiculo)
+      .get(authCtrl.ensureIsAuthenticated,authCtrl.checkUserEmpleadoAdmin,vehiculosCtrl.renderInsertVehiculo)
       .post(vehiculosCtrl.insertNewVehiculo);
 router.route('/editVehiculo/:idVehiculo')
-      .get(authCtrl.ensureIsAuthenticated,vehiculosCtrl.renderEditVehiculo)
+      .get(authCtrl.ensureIsAuthenticated,authCtrl.checkUserEmpleadoAdmin,vehiculosCtrl.renderEditVehiculo)
       .post(vehiculosCtrl.editVehiculo);
 
 module.exports = router;

@@ -12,15 +12,39 @@ var UserCtrl = require('../controllers/UsersController');
 var authCtrl = require("../../controllers/authController");
 
 var modeloCtrl = require('../controllers/modeloController');
+
+var tipoCombustibleCtrl = require('../controllers/TipoCombustibleController');
+
+var clientesCtrl = require('../controllers/ClienteController');
 //User
 router.route('/Users')
       .get(UserCtrl.getUsers)
       .post(UserCtrl.insertUser);
+      
 //Empleados
 
-router.route('/Empleados')
+router.route('/Empleado')
+      .get(empleadoCtrl.getAllEmpleados);
+
+router.route('/insertEmpleado')
       .get(empleadoCtrl.getEstados)
       .post(empleadoCtrl.insertNewEmpleado);
+
+router.route('/editEmpleado/:empleadoId')
+      .get(empleadoCtrl.getEditEmpleado)
+      .put(empleadoCtrl.editEmpleado);
+
+//Clientes
+router.route('/Clientes')
+      .get(clientesCtrl.getClientes);
+
+router.route('/insertClientes')
+      .get(clientesCtrl.getInsertClientes)
+      .post(clientesCtrl.insertClientes);
+
+router.route('/editClientes/:clienteId')
+      .get(clientesCtrl.getEditClientes)
+      .put(clientesCtrl.editClientes);
 
 //Vehiculos
 router.route('/Vehiculos')
@@ -66,4 +90,16 @@ router.route('/insertModelo')
 router.route('/editModelo/:modeloId')
       .get(modeloCtrl.getEditModelo)
       .put(modeloCtrl.editModelo);
+
+//tipo Combustible
+router.route('/tipoCombustible')
+      .get(tipoCombustibleCtrl.getTipoCombustibles);
+
+router.route('/insertTipoCombustible')
+      .get(tipoCombustibleCtrl.getInsertTipoCombustible)
+      .post(tipoCombustibleCtrl.insertTipoCombustible);
+
+router.route('/editTC/:tcId')
+      .get(tipoCombustibleCtrl.getEditTipoCombustible)
+      .put(tipoCombustibleCtrl.editTipoCombustible);
 module.exports = router;

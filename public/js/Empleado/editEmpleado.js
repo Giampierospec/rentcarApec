@@ -1,9 +1,9 @@
-(function () {
+(function(){
     var url = window.location.href.split('/');
-    $.get('/api/EditModelo/'+url[5], function (dep) {
+    $.get('/api/editEmpleado/'+url[5],function(dep){
         new Vue({
-            el: '#app',
-            data: {
+            el:'#app',
+            data:{
                 dependencies: dep
             }
         });

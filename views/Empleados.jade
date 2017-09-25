@@ -1,0 +1,31 @@
+extends shared/layout
+
+block content
+  div(class="row")
+    div(class="col-sm-8 col-sm-offset-2")
+      h2(class="text-center") Empleados
+      a(href="/Empleados/Insertar", class="btn btn-primary") Insertar
+      br
+      br
+      table(class="table table-responsive")
+        thead
+          tr
+            th Nombre
+            th Cedula
+            th Tanda
+            th Porciento Comision
+            th fecha de Ingreso
+            th Estado
+        tbody
+          -for(var i = 0; i < data.length; i++){
+          tr
+            td= data[i].nombre
+            td= data[i].cedula
+            td= data[i].tandaLabor
+            td= data[i].porcientoComision
+            td= data[i].fechaIngreso.substring(0,10)
+            td=data[i].estado
+            td 
+              a(href="/Empleados/Editar/"+data[i]._id).btn.btn-primary Editar
+          -}
+

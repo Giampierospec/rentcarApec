@@ -2,8 +2,8 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
 var InspeccionSchema = new Schema({
-    vehiculo:{type:Schema.Types.ObjectId, ref:'Vehiculo'},
-    cliente:{type:Schema.Types.ObjectId, ref:'Cliente'},
+    vehiculo:{type:String},
+    cliente:{type:String},
     tieneRalladuras:{type:Boolean},
     cantidadCombustible:{type:Number},
     tieneGomaRespuesta:{type:Boolean},
@@ -11,8 +11,8 @@ var InspeccionSchema = new Schema({
     tieneRoturasCristal:{type:Boolean},
     estadoGomas:{type:Boolean},
     fecha: {type:Date, default:Date.now},
-    empleado:{type:Schema.Types.ObjectId, ref:'Empleado'},
-    estado:{type:Schema.Types.ObjectId, ref:'Estado' }
+    empleado:{type:String},
+    estado:{type:String }
 });
 var Inspeccion = {
     schema: InspeccionSchema,

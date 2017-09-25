@@ -71,8 +71,8 @@ var Ctrl = (function(){
                 }
     };
     var EditTipoVehiculo = function(req, res, next){
-        req.bodyCheck('descripcion', 'El campo descripcion es requerido').notEmpty();
-        req.bodyCheck('estado', 'El campo estado es requerido').notEmpty();
+        req.checkBody('descripcion', 'El campo descripcion es requerido').notEmpty();
+        req.checkBody('estado', 'El campo estado es requerido').notEmpty();
         var errors = req.validationErrors();
         if(errors){
             res.render('editTipoVehiculo',{

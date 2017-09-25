@@ -8,7 +8,7 @@ var Ctrl = (function(){
             return next();
         }
         else{
-            res.redirect('/auth/login');
+            res.redirect('/');
             return;
         }
     };

@@ -13,7 +13,6 @@ var ClientesSchema = new Schema({
     limiteCredito: Number,
     tipoPersona:{type:String, default:'Fisica'},
     estado:{type:String},
-    vehiculo:{type:String},
     renta: [Renta],
     inspeccion: [Inspeccion]
 });

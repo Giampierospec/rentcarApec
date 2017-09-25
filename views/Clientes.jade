@@ -1,0 +1,31 @@
+extends shared/layout
+
+block content
+  div(class="row")
+    div(class="col-sm-8 col-sm-offset-2")
+      h2(class="text-center") Clientes
+      a(href="/Clientes/Insertar", class="btn btn-primary") Insertar
+      br
+      br
+      table(class="table table-responsive")
+        thead
+          tr
+            th Nombre
+            th Cedula
+            th No. Tarjeta
+            th Limite Credito
+            th Tipo Persona
+            th Estado
+        tbody
+          -for(var i = 0; i < cliente.length; i++){
+          tr
+            td= cliente[i].nombre
+            td= cliente[i].cedula
+            td= cliente[i].noTarjetaCR
+            td= cliente[i].limiteCredito
+            td= cliente[i].tipoPersona
+            td= cliente[i].estado
+            td 
+              a(href="/Clientes/Editar/"+cliente[i]._id).btn.btn-primary Editar
+          -}
+

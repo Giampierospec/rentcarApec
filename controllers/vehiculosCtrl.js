@@ -53,7 +53,7 @@ var vehiculos = (function(){
          return;
      }
      else{
-     Vehiculo.findOne({ noChasis: req.body.noChasis }, function (err, vh) {
+     Vehiculo.findOne({ descripcion: req.body.descripcion }, function (err, vh) {
          if (vh) {
              console.log(vh);
             var error = new Error("El vehiculo ya existe intente denuevo");

@@ -1,6 +1,7 @@
 var mongoose = require('mongoose');
 var Estado = mongoose.model('Estado');
 var Marca = mongoose.model('MarcaVehiculos');
+var Vehiculo = mongoose.model('Vehiculo');
 
 var Ctrl = (function(){
     var getMarcasActivas = function(req, res, next){
@@ -69,6 +70,23 @@ var Ctrl = (function(){
         var marcaId = req.params.marcaId;
         Marca.findById(marcaId)
             .exec(function(err,marca){
+                Vehiculo.find({ marca: marca.descripcion })
+                    .exec(function (err, vehiculos) {
+                        if (vehiculos.length > 0) {
+                            vehiculos.forEach(function (vh) {
+                                if (req.body.estado === 'Inactivo') {
+                                    vh.marca = '';
+                                }
+                                else {
+                                    vh.marca = req.body.descripcion;
+                                }
+                                vh.save(function (err) {
+                                    if (err) { return next(err); }
+                                });
+                            });
+
+                        }
+                    });
                 marca.descripcion = req.body.descripcion;
                 marca.estado = req.body.estado;
                 marca.save(function(err){

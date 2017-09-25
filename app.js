@@ -15,6 +15,9 @@ var tipoVehiculos = require('./routes/tipoVehiculo');
 var api = require('./api/routes/apiRoutes');
 var marca = require('./routes/marca');
 var modelo = require('./routes/modelo');
+var tipoCombustible = require('./routes/tipoCombustible');
+var empleado = require('./routes/empleado');
+var cliente = require('./routes/cliente');
 var app = express();
 
 // view engine setup
@@ -49,6 +52,9 @@ app.use('/auth', Auth);
 app.use('/tipoVehiculos',tipoVehiculos);
 app.use('/marcaVehiculo',marca);
 app.use('/modeloVehiculo',modelo);
+app.use('/tipoCombustible', tipoCombustible);
+app.use('/Empleados',empleado);
+app.use('/Clientes',cliente);
 app.use('/api',api);
 
 

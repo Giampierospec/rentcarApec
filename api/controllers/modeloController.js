@@ -2,6 +2,7 @@ var mongoose = require('mongoose');
 var Modelo = mongoose.model('ModeloCarro');
 var Marca = mongoose.model('MarcaVehiculos');
 var Estado = mongoose.model('Estado');
+var Vehiculo = mongoose.model('Vehiculo');
 
 var Ctrl = (function(){
 var getModelos = function(req, res, next){
@@ -94,27 +95,61 @@ var editModelo = function(req, res, next){
     Modelo.findById(modeloId)
           .exec(function(err,modelo){
             if(err){return next(err);}
+            Vehiculo.find({ modelo: modelo.descripcion })
+                .exec(function (err, vehiculos) {
+                    if (vehiculos.length > 0) {
+                        vehiculos.forEach(function (vh) {
+                            if (req.body.estado === 'Inactivo') {
+                                vh.modelo = '';
+                            }
+                            else {
+                                vh.modelo = req.body.descripcion;
+                            }
+                            vh.save(function (err) {
+                                if (err) { return next(err); }
+                            });
+                        });
+
+                    }
+                });
             modelo.descripcion = req.body.descripcion;
             modelo.marca = req.body.marca;
             modelo.estado = req.body.estado;
             modelo.save(function(err){
                 if(err){return next(err);}
             });
-            Marca.findOne({descripcion:modelo.marca})
-                    .exec(function(err,marca){
-                        marca.modelo.id(modeloId).remove();
-                        marca.modelo.push(modelo);
-                        marca.save(function(err){
-                            if(err){return next(err);}
-                        });
-                    });
+            Marca.findOneAndUpdate({descripcion:modelo.marca,'modelo._id':modelo._id},
+                {
+                    '$set':{
+                        'modelo.$':modelo
+                    }
+                })
+                .exec(function (err, marca) {
+                    if(err){return next(err);}
+                    if(!marca){
+                        Marca.findOne({descripcion:modelo.marca})
+                             .exec(function(err,marca){
+                                if(err){return next(err);}
+                                marca.modelo.push(modelo);
+                                marca.save(function (err) {
+                                    if (err) { return next(err); }
+                                });
+                             });
+                    }
+                });
             Estado.findOne({estado:modelo.estado})
                   .exec(function(err,estado){
-                      estado.modeloVehiculo.id(modeloId).remove();
-                      estado.modeloVehiculo.push(modelo);
-                      estado.save(function(){
-                          if(err){return next(err);}
-                      });
+                      if (err) { return next(err); }
+                      if (!estado) {
+                          Estado.findOne({ Estado: modelo.estado })
+                              .exec(function (err, estado) {
+                                  if (err) { return next(err); }
+                                  estado.modeloVehiculo.push(modelo);
+                                  estado.save(function (err) {
+                                      if (err) { return next(err); }
+                                  });
+                              });
+                      }
                       res.json({
                           modelo:estado
                       });

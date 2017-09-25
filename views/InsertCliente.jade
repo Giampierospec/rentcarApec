@@ -4,7 +4,7 @@ block content
     #app
         .row
             div(class="col-sm-8 col-sm-offset-2")
-                        h2 Ingrese un nuevo empleado
+                        h2 Ingrese un nuevo Cliente
                         hr
                         -if(errors)
                             for error in errors
@@ -36,13 +36,17 @@ block content
 
                                     .form-group.input-group
                                         label.input-group-addon
-                                            i.fa.fa-calendar-times-o
-                                        input(type="text", name="tanda", placeholder="Introduzca una tanda de labor").form-control    
+                                            i.fa.fa-credit-card
+                                        input(type="number", name="tarjeta", placeholder="Introduzca un numero de tarjeta").form-control    
 
                                     .form-group.input-group
                                         label.input-group-addon
-                                            i.fa.fa-calendar
-                                        input(type="date", name="fI", placeholder="Introduzca la fecha de ingreso").form-control  
+                                            i.fa.fa-credit-card
+                                        input(type="number", name="credito", placeholder="Introduzca limite tarjeta de credito").form-control  
+                                    .form-group.input-group
+                                        label.input-group-addon
+                                            i.fa.fa-user
+                                        input(type="string", name="tipoPersona", placeholder="Introduzca tipo de persona").form-control  
                                     .form-group.input-group
                                         label.input-group-addon
                                             i.fa.fa-bars
@@ -52,4 +56,4 @@ block content
                                     .form-group
                                         button(type="submit").btn.btn-success Insertar
 block scripts
-    script(src="/js/Empleado/insertEmpleado.js")
+    script(src="/js/Clientes/insertCliente.js")

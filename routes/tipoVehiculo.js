@@ -6,9 +6,9 @@ router.route('/')
     .get(authCtrl.ensureIsAuthenticated,tpCtrl.getTipoVehiculos);
 
 router.route('/Insertar')
-        .get(authCtrl.ensureIsAuthenticated, tpCtrl.renderInsertTipoVehiculos)
+        .get(authCtrl.ensureIsAuthenticated, authCtrl.checkUserEmpleadoAdmin,tpCtrl.renderInsertTipoVehiculos)
         .post(tpCtrl.insertTipoVehiculo);
 router.route('/Editar/:tipoVehiculoId')
-        .get(authCtrl.ensureIsAuthenticated, tpCtrl.renderEditTipoVehiculos)
+        .get(authCtrl.ensureIsAuthenticated, authCtrl.checkUserEmpleadoAdmin, tpCtrl.renderEditTipoVehiculos)
         .post(tpCtrl.EditTipoVehiculo);
 module.exports = router;

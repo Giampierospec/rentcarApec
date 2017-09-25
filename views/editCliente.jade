@@ -4,7 +4,8 @@ block content
     #app
         .row
             div(class="col-sm-8 col-sm-offset-2")
-                        h2 Ingrese un nuevo empleado
+                        h2 Editar Cliente
+                            b &nbsp; {{dependencies.cliente.nombre}}
                         hr
                         -if(errors)
                             for error in errors
@@ -18,38 +19,34 @@ block content
                                 form(method="post").form-horizontal
                                     .form-group.input-group
                                         label.input-group-addon
-                                            i.fa.fa-envelope
-                                        input(type="email",name="email", placeholder="introduzca un email valido").form-control
-                                    .form-group.input-group
-                                        label.input-group-addon
-                                            i.fa.fa-lock
-                                        input(type="password", name="password", placeholder="introduzca una contraseña").form-control
-                                    .form-group.input-group
-                                        label.input-group-addon
                                             i.fa.fa-user
-                                        input(type="text", name="nombre", placeholder="introduzca un nombre").form-control
+                                        input(type="text", name="nombre", placeholder="introduzca un nombre",v-model="dependencies.cliente.nombre").form-control
 
                                     .form-group.input-group
                                         label.input-group-addon
                                             i.fa.fa-id-card
-                                        input(type="text", name="cedula" id="cedula", placeholder="introduzca una cedula").form-control
+                                        input(type="text", name="cedula" id="cedula", placeholder="introduzca una cedula",v-model="dependencies.cliente.cedula").form-control
 
                                     .form-group.input-group
                                         label.input-group-addon
-                                            i.fa.fa-calendar-times-o
-                                        input(type="text", name="tanda", placeholder="Introduzca una tanda de labor").form-control    
+                                            i.fa.fa-credit-card
+                                        input(type="number", name="tarjeta", placeholder="Introduzca un numero de tarjeta",v-model="dependencies.cliente.noTarjetaCR").form-control    
 
                                     .form-group.input-group
                                         label.input-group-addon
-                                            i.fa.fa-calendar
-                                        input(type="date", name="fI", placeholder="Introduzca la fecha de ingreso").form-control  
+                                            i.fa.fa-credit-card
+                                        input(type="number", name="credito", placeholder="Introduzca limite tarjeta de credito",v-model="dependencies.cliente.limiteCredito").form-control  
+                                    .form-group.input-group
+                                        label.input-group-addon
+                                            i.fa.fa-user
+                                        input(type="string", name="tipoPersona", placeholder="Introduzca tipo de persona",v-model="dependencies.cliente.tipoPersona").form-control  
                                     .form-group.input-group
                                         label.input-group-addon
                                             i.fa.fa-bars
-                                        select(name="estado").form-control
+                                        select(name="estado", v-model="dependencies.cliente.estado").form-control
                                             option(value="", disabled, selected) Escoja una opcion
                                             option(v-for="estado in dependencies.estados" v:bind-value="estado.estado") {{estado.estado}}
                                     .form-group
-                                        button(type="submit").btn.btn-success Insertar
+                                        button(type="submit").btn.btn-success Editar
 block scripts
-    script(src="/js/Empleado/insertEmpleado.js")
+    script(src="/js/Clientes/editCliente.js")

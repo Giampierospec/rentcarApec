@@ -1,6 +1,7 @@
 var mongoose = require('mongoose');
 var TipoVehiculo = mongoose.model('TipoVehiculo');
 var Estado = mongoose.model('Estado');
+var Vehiculo = mongoose.model('Vehiculo');
 var Ctrl = (function(){
     var getAllTipoVehiculos = function (req, res, next) {
         TipoVehiculo.find({ estado: 'Activo' })
@@ -70,6 +71,23 @@ var Ctrl = (function(){
             TipoVehiculo.findById(tvId)
                         .exec(function(err, tv){
                             if(err){return next(err);}
+                            Vehiculo.find({ tipoVehiculo: tv.descripcion })
+                                .exec(function (err, vehiculos) {
+                                    if (vehiculos.length > 0) {
+                                        vehiculos.forEach(function (vh) {
+                                            if (req.body.estado ==='Inactivo'){
+                                                vh.tipoVehiculo = '';
+                                            }
+                                            else{
+                                                vh.tipoVehiculo = req.body.descripcion;
+                                            }
+                                            vh.save(function (err) {
+                                                if (err) { return next(err); }
+                                            });
+                                        });
+
+                                    }
+                                });
                             tv.descripcion = req.body.descripcion;
                             tv.estado = req.body.estado;
                             tv.save(function(err){

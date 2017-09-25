@@ -28,7 +28,15 @@ html
               a(href="/marcaVehiculo") Marcas
             li
               a(href="/modeloVehiculo") Modelos
+            li
+              a(href="/tipoCombustible") Tipo Combustibles
+            -if(currentUser.tipo =='admin'){
+            li
+              a(href="/Empleados") Empleados
+            li
+              a(href="/Clientes") Clientes
 
+            -}
             li
               a(href="/auth/logout") logout
     block content

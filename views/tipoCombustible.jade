@@ -1,0 +1,28 @@
+extend shared/layout
+
+block content
+    div.row
+        .col-sm-8.col-sm-offset-2
+            h2.text-center Tipos de combustibles
+            hr
+            a(href="/tipoCombustible/Insertar").btn.btn-primary Insertar
+            br
+            br
+            table.table.table-responsive
+                thead
+                    tr
+                        th Tipo Combustible
+                        th Estado
+                tbody
+                    -if(tc){
+                        
+                        -for(var i =0; i < tc.length; i++){
+                            tr
+                                td=tc[i].descripcion
+                                td=tc[i].estado
+                                td
+                                    a(href="/TipoCombustible/Editar/"+tc[i]._id).btn.btn-primary Editar
+                        -}
+                            
+                    -}
+

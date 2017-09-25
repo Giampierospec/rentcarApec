@@ -10,25 +10,20 @@ block content
                             li.text-danger=error.msg
                 -if(error)
                     span.text-danger=error
-                h2.text-center Editar Modelo
-                    b &nbsp; {{dependencies.modelo.descripcion}}
+                h2.text-center Editar combustible
+                    b &nbsp; {{dependencies.tipoCombustible.descripcion}}
                 hr
                 form(method="post").form-horizontal
                     .form-group.input-group
                         label.input-group-addon Nombre
-                        input(type="text", name="descripcion", v-model="dependencies.modelo.descripcion").form-control
+                        input(type="text", name="descripcion",v-model="dependencies.tipoCombustible.descripcion").form-control
                     .form-group.input-group
                         label.input-group-addon estado
-                        select(name="estado",v-model="dependencies.modelo.estado").form-control
+                        select(name="estado",v-model="dependencies.tipoCombustible.estado").form-control
                             option(value="", selected, disabled) Escoja una opcion
                             option(v-for="estado in dependencies.estados",v-bind:value="estado.estado"){{estado.estado}}
-                    .form-group.input-group
-                        label.input-group-addon Marca
-                        select(name="marca",v-model="dependencies.modelo.marca").form-control
-                            option(value="", selected, disabled) Escoja una opcion
-                            option(v-for="marca in dependencies.marcas",v-bind:value="marca.descripcion"){{marca.descripcion}}
                     .form-group
-                        button(type="submit").btn.btn-success Editar
+                        button(type="submit").btn.btn-success Insertar
                     
 block scripts
-    script(src="/js/modelos/editMd.js")                   
+    script(src="/js/tipoCombustible/editTc.js")                   

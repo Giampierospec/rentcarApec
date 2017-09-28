@@ -8,6 +8,7 @@ block content
             a(href="/marcaVehiculo/Insertar").btn.btn-primary Insertar
             br
             br
+            -if(marcas.length > 0){
             table.table.table-responsive
                 thead
                     tr
@@ -22,3 +23,9 @@ block content
                                 td
                                     a(href="/marcaVehiculo/Editar/"+marca._id).btn.btn-primary Editar
 
+            -}
+            -else{
+                h2.text-center 
+                    i 
+                        b No hay nada para mostrar
+            -}

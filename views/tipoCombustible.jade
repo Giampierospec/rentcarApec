@@ -1,4 +1,4 @@
-extend shared/layout
+extends shared/layout
 
 block content
     div.row
@@ -8,21 +8,25 @@ block content
             a(href="/tipoCombustible/Insertar").btn.btn-primary Insertar
             br
             br
+            -if(tc.length > 0){
             table.table.table-responsive
                 thead
                     tr
                         th Tipo Combustible
                         th Estado
-                tbody
-                    -if(tc){
-                        
-                        -for(var i =0; i < tc.length; i++){
-                            tr
-                                td=tc[i].descripcion
-                                td=tc[i].estado
-                                td
-                                    a(href="/TipoCombustible/Editar/"+tc[i]._id).btn.btn-primary Editar
-                        -}
-                            
+                tbody 
+                    -for(var i =0; i < tc.length; i++){
+                        tr
+                            td=tc[i].descripcion
+                            td=tc[i].estado
+                            td
+                                a(href="/TipoCombustible/Editar/"+tc[i]._id).btn.btn-primary Editar
                     -}
+                            
+            -}
+            -else{
+                h2.text-center
+                    i 
+                        b No hay nada para mostrar
+            -}
 

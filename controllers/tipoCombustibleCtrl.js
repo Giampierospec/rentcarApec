@@ -1,4 +1,4 @@
-var tipoCombustible = require('../models/TipoCombustible').model;
+var TipoCombustible = require('../models/TipoCombustible').model;
 var request = require('request');
 var apiOptions = require('../utils/serverLocation');
 

@@ -32,7 +32,7 @@ var Ctrl = (function(){
         });
         tipoCombustible.save(function(err){
             if(err){return next(err);}
-            console.log(tipoCompustible);
+            console.log(tipoCombustible);
         });
         Estado.findOne({estado:tipoCombustible.estado})
             .exec(function(err, estado){

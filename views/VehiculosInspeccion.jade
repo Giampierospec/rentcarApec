@@ -3,8 +3,7 @@ extends shared/layout
 block content
   div(class="row")
     div(class="col-sm-8 col-sm-offset-2")
-      h2(class="text-center") Vehículos almacenados
-      a(href="/InsertVehiculos", class="btn btn-primary") Insertar
+      h2(class="text-center") Vehículos Pendientes de inspeccion
       br
       br
       -if(data.length > 0){
@@ -33,11 +32,7 @@ block content
             td=data[i].tipoCombustible
             td=data[i].estado
             td 
-              a(href="/editVehiculo/"+data[i]._id).btn.btn-primary Editar
-            -if(currentUser.tipo !== 'cliente'){
-              td
-                a(href=''+data[i]._id)#insp.btn.btn-primary Rentar
-            -}
+              a(href="/Inspeccion/genInspeccion/"+data[i].descripcion).btn.btn-primary Inspeccionar
           -}
       -}
       -else{
@@ -45,6 +40,4 @@ block content
           i 
             b No hay nada para mostrar
       -}
-block scripts
-  script(src="/js/vehiculos/sendToInspeccion.js")
 

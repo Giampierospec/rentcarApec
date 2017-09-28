@@ -7,6 +7,7 @@ block content
       a(href="/Clientes/Insertar", class="btn btn-primary") Insertar
       br
       br
+      -if(cliente.length > 0){
       table(class="table table-responsive")
         thead
           tr
@@ -28,4 +29,10 @@ block content
             td 
               a(href="/Clientes/Editar/"+cliente[i]._id).btn.btn-primary Editar
           -}
+        -}
+        -else{
+          h2.text-center
+            b
+              i No hay nada para mostrar
+        -}
 

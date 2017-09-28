@@ -151,7 +151,7 @@ var Ctrl = (function(){
                         .exec(function (err, tc) {
                             if (err) { return next(err); }
                             if(!tc){
-                                TipoCombustible.findOne({ descripcion: vehiculo.marca })
+                                TipoCombustible.findOne({ descripcion: vehiculo.tipoCombustible })
                                     .exec(function (err, tc) {
                                         if (err) { return next(err); }
                                         tc.vehiculo.push(vehiculo);
@@ -281,7 +281,6 @@ var Ctrl = (function(){
                 });
             });    
     };
-
     return {
         getAllVehiculos :getAllVehiculos,
         insertVehiculos: insertVehiculos,

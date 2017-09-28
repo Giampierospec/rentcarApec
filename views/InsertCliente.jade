@@ -52,7 +52,7 @@ block content
                                             i.fa.fa-bars
                                         select(name="estado").form-control
                                             option(value="", disabled, selected) Escoja una opcion
-                                            option(v-for="estado in dependencies.estados" v:bind-value="estado.estado") {{estado.estado}}
+                                            option(v-for="estado in dependencies.estados" v-bind:value="estado.estado") {{estado.estado}}
                                     .form-group
                                         button(type="submit").btn.btn-success Insertar
 block scripts

@@ -1,0 +1,88 @@
+extends shared/layout
+
+block content
+    #app
+        .row
+            div(class="col-sm-8 col-sm-offset-2")
+                        h2 Inspeccion de Carro
+                            b &nbsp; {{dependencies.vehiculo}}
+                        hr
+                        -if(errors)
+                            for error in errors
+                                ul
+                                    li.text-danger=error.msg
+                        -if(error)
+                            span.text-danger=error
+
+                        .row
+                            .col-sm-6.col-sm-offset-3
+                                form(method="post").form-horizontal
+                                    .form-group.input-group
+                                        label.input-group-addon
+                                            i.fa.fa-car
+                                        input(type="text",name="vehiculo" v-bind:value="dependencies.vehiculo" disabled).form-control
+                                    .form-group.input-group
+                                        label.input-group-addon
+                                            i.fa.fa-user
+                                        select(name="cliente").form-control
+                                            option(value="",disabled, selected) Escoja un cliente
+                                            option(v-for="cliente in dependencies.clientes" v-bind:value="cliente.email") {{cliente.nombre}}
+                                    .form-group.input-group
+                                        label.input-group-addon
+                                            i.fa.fa-car
+                                        select(name="ralladura").form-control
+                                            option(value="", disabled, selected) Escoja si tiene ralladuras
+                                            option(value="true") Si
+                                            option(value="false") No
+                                        
+                                    .form-group.input-group
+                                        label.input-group-addon
+                                            i.fa.fa-fire-extinguisher
+                                        input(type="number", name="cantCombustible"  placeholder="escriba la cantidad de combustible").form-control
+
+                                    .form-group.input-group
+                                        label.input-group-addon
+                                            i.fa.fa-car
+                                        select(name="gomaRespuesta").form-control
+                                            option(value="", disabled, selected) Escoja si tiene Goma de respuesta
+                                            option(value="true") Si
+                                            option(value="false") No   
+
+                                    .form-group.input-group
+                                        label.input-group-addon
+                                            i.fa.fa-automobile
+                                        select(name="gato").form-control
+                                            option(value="", disabled, selected) Escoja si tiene Gato
+                                            option(value="true") Si
+                                            option(value="false") No   
+                                    .form-group.input-group
+                                        label.input-group-addon
+                                            i.fa.fa-window-close-o
+                                        select(name="roturasCristal").form-control
+                                            option(value="", disabled, selected) Escoja si tiene roturas en el cristal
+                                            option(value="true") Si
+                                            option(value="false") No   
+                                    .form-group.input-group
+                                        label.input-group-addon
+                                            i.fa.fa-car
+                                        select(name="gomas").form-control
+                                            option(value="", disabled, selected) Escoja estado de gomas
+                                            option(value="true") Ok
+                                            option(value="false") Mal
+                                    
+                                    .form-group.input-group
+                                        label.input-group-addon
+                                            i.fa.fa-user
+                                        select(name="empleado").form-control
+                                            option(value="", disabled, selected) escoja un empleado
+                                            option(v-for="empleado in dependencies.empleados", v-bind:value="empleado.email") {{empleado.nombre}}
+                                    .form-group.input-group
+                                        label.input-group-addon
+                                            i.fa.fa-bars
+                                        select(name="estado").form-control
+                                            option(value="", disabled, selected) Escoja una opcion
+                                            option(v-for="estado in dependencies.estados", v-bind:value="estado.estado") {{estado.estado}}
+                                    .form-group
+                                        button(type="submit").btn.btn-success Procesar Inspeccion
+block scripts
+    script(src="/js/inspeccion/insertInsp.js")

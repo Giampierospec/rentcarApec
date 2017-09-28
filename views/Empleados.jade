@@ -7,6 +7,7 @@ block content
       a(href="/Empleados/Insertar", class="btn btn-primary") Insertar
       br
       br
+      -if(data.length > 0){
       table(class="table table-responsive")
         thead
           tr
@@ -27,5 +28,11 @@ block content
             td=data[i].estado
             td 
               a(href="/Empleados/Editar/"+data[i]._id).btn.btn-primary Editar
+          -}
+          -}
+          -else{
+            h2.text-center
+              i
+                b No hay nada para mostrar
           -}
 

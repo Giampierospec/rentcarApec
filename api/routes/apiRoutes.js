@@ -16,6 +16,8 @@ var modeloCtrl = require('../controllers/modeloController');
 var tipoCombustibleCtrl = require('../controllers/TipoCombustibleController');
 
 var clientesCtrl = require('../controllers/ClienteController');
+
+var inspCtrl = require('../controllers/InspeccionController');
 //User
 router.route('/Users')
       .get(UserCtrl.getUsers)
@@ -102,4 +104,19 @@ router.route('/insertTipoCombustible')
 router.route('/editTC/:tcId')
       .get(tipoCombustibleCtrl.getEditTipoCombustible)
       .put(tipoCombustibleCtrl.editTipoCombustible);
+
+//Inspeccion
+
+router.route('/setEstadoVehiculo')
+      .post(inspCtrl.changeEstadoVehiculo);
+
+router.route('/vehiculosInspeccion')
+      .get(inspCtrl.showVehiculosWithEstadoInspeccion);
+
+router.route('/insertInspeccion/:vehiculoDesc')
+      .get(inspCtrl.getInsertInspeccion)
+      .post(inspCtrl.insertInspeccion);
+router.route('/getInspeccionClientes/:userEmail')
+      .get(inspCtrl.getInspeccionClientes);
+
 module.exports = router;

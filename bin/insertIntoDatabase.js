@@ -21,6 +21,9 @@ var data={
         },
         {
             estado: 'Devuelto'
+        },
+        {
+            estado:'Inspeccion'
         }
     ],
     tipoVehiculo:[

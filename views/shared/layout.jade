@@ -37,6 +37,12 @@ html
               a(href="/Clientes") Clientes
 
             -}
+            li.dropdown
+              a(data-toggle="dropdown", href="#").dropdown-toggle Inspeccion
+                span.caret
+              ul.dropdown-menu
+                li
+                  a(href="/Inspeccion") Vehiculos Pendientes
             li
               a(href="/auth/logout") logout
     block content

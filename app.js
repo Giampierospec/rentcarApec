@@ -18,6 +18,7 @@ var modelo = require('./routes/modelo');
 var tipoCombustible = require('./routes/tipoCombustible');
 var empleado = require('./routes/empleado');
 var cliente = require('./routes/cliente');
+var inspeccion = require('./routes/Inspeccion');
 var app = express();
 
 // view engine setup
@@ -43,7 +44,6 @@ app.use(passport.session());
 app.use(flash());
 
 app.use(function(req, res, next){
-  console.log(req.user);
   res.locals.currentUser = req.user;
   next();
 });
@@ -55,6 +55,7 @@ app.use('/modeloVehiculo',modelo);
 app.use('/tipoCombustible', tipoCombustible);
 app.use('/Empleados',empleado);
 app.use('/Clientes',cliente);
+app.use('/Inspeccion', inspeccion);
 app.use('/api',api);
 
 

@@ -18,6 +18,8 @@ var tipoCombustibleCtrl = require('../controllers/TipoCombustibleController');
 var clientesCtrl = require('../controllers/ClienteController');
 
 var inspCtrl = require('../controllers/InspeccionController');
+
+var rentaCtrl = require('../controllers/RentaController');
 //User
 router.route('/Users')
       .get(UserCtrl.getUsers)
@@ -116,7 +118,17 @@ router.route('/vehiculosInspeccion')
 router.route('/insertInspeccion/:vehiculoDesc')
       .get(inspCtrl.getInsertInspeccion)
       .post(inspCtrl.insertInspeccion);
-router.route('/getInspeccionClientes/:userEmail')
+router.route('/getInspeccionClientes')
       .get(inspCtrl.getInspeccionClientes);
+
+router.route('/getInspeccionEmpleados')
+      .get(inspCtrl.getInspeccionEmpleados);
+
+//Rentas
+router.route('/getRentaClientes')
+      .get(rentaCtrl.getRentaClientes);
+router.route('/getRentaEmpleados')
+      .get(rentaCtrl.getRentaEmpleados);
+
 
 module.exports = router;

@@ -9,4 +9,9 @@ router.route('/')
 router.route('/genInspeccion/:vehiculoDesc')
       .get(authCtrl.ensureIsAuthenticated, authCtrl.checkUserEmpleadoAdmin, inspCtrl.renderGenInspeccion)
       .post(inspCtrl.procesarInspeccion);
+
+router.route('/Clientes')
+      .get(authCtrl.ensureIsAuthenticated, authCtrl.checkUserEmpleadoAdmin,inspCtrl.getInspeccionClientes);
+router.route('/Empleados')
+      .get(authCtrl.ensureIsAuthenticated, authCtrl.checkUserEmpleadoAdmin, inspCtrl.getInspeccionEmpleados);
 module.exports = router;

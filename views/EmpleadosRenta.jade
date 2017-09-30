@@ -1,0 +1,48 @@
+extends shared/layout
+
+block content
+  #app
+    div(class="row")
+      div(class="col-sm-8 col-sm-offset-2")
+        h2(class="text-center")#title Rentas asistidas por:
+          b= msg
+          
+        br
+        br
+        form(method="GET").form-inline#empleadoForm
+          .form-group.input-group
+            label.input-group-addon
+              i.fa.fa-search
+            select(name="empleadoEmail", v-on:change="triggerSubmit" v-model="empleado").form-control#empleadoEmail
+              option(value="",selected) 
+              option(v-for="empleado in dependencies", v-bind:value="empleado.email"){{empleado.nombre}}
+        -if(data.length > 0){
+          #printContent
+            table(class="table table-responsive")
+              thead
+                tr
+                  th Vehiculo
+                  th Empleado
+                  th fecha Renta
+                  th Comentario
+              tbody
+                -for(var i = 0; i < data.length; i++){
+                tr
+                  td= data[i].vehiculo
+                  td= data[i].empleado
+                  td= data[i].fechaRenta.substring(0,10)
+                  td= data[i].comentario
+                -}
+        button(type="button" v-on:click="printContent()").btn.btn-primary#btnPrint
+          i.fa.fa-print Imprimir
+        -}
+        -else{
+          h2.text-center 
+            i 
+              b No hay nada para mostrar
+        -}
+block scripts
+  script(src="/js/inspeccion/getEmpleados.js")
+  
+  
+

@@ -19,6 +19,7 @@ var tipoCombustible = require('./routes/tipoCombustible');
 var empleado = require('./routes/empleado');
 var cliente = require('./routes/cliente');
 var inspeccion = require('./routes/Inspeccion');
+var renta = require('./routes/renta');
 var app = express();
 
 // view engine setup
@@ -56,6 +57,7 @@ app.use('/tipoCombustible', tipoCombustible);
 app.use('/Empleados',empleado);
 app.use('/Clientes',cliente);
 app.use('/Inspeccion', inspeccion);
+app.use('/Renta',renta);
 app.use('/api',api);
 
 

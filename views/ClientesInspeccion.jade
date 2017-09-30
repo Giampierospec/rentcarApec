@@ -1,0 +1,58 @@
+extends shared/layout
+
+block content
+  #app
+    div(class="row")
+      div(class="col-sm-8 col-sm-offset-2")
+        h2(class="text-center")#title Inspeccion del cliente:
+          b= msg
+          
+        br
+        br
+        form(method="GET").form-inline#clienteForm
+          .form-group.input-group
+            label.input-group-addon
+              i.fa.fa-search
+            select(name="clienteEmail", v-on:change="triggerSubmit" v-model="cliente").form-control#clienteEmail
+              option(value="",selected) 
+              option(v-for="clienteEmail in dependencies", v-bind:value="clienteEmail.email"){{clienteEmail.nombre}}
+        -if(data.length > 0){
+          #printContent
+            table(class="table table-responsive")
+              thead
+                tr
+                  th Vehiculo
+                  th Cliente
+                  th Tiene Ralladuras
+                  th Cantidad Combustible
+                  th Tiene Goma Respuesta
+                  th Tiene Gato
+                  th Tiene Roturas en el cristal
+                  th Estado Gomas
+                  th fecha
+              tbody
+                -for(var i = 0; i < data.length; i++){
+                tr
+                  td= data[i].vehiculo
+                  td= data[i].cliente
+                  td= data[i].tieneRalladuras
+                  td= data[i].cantidadCombustible
+                  td= data[i].tieneGomaRespuesta
+                  td=data[i].tieneGato
+                  td=data[i].tieneRoturasCristal
+                  td=data[i].estadoGomas
+                  td=data[i].fecha.substring(0,10)
+                -}
+        button(type="button" v-on:click="printContent()").btn.btn-primary#btnPrint
+          i.fa.fa-print Imprimir
+        -}
+        -else{
+          h2.text-center 
+            i 
+              b No hay nada para mostrar
+        -}
+block scripts
+  script(src="/js/inspeccion/getClientes.js")
+  
+  
+

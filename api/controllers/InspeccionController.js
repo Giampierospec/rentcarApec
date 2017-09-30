@@ -192,6 +192,10 @@ var insertInspeccion = function(req, res, next){
             comentario: 'Ok',
             estado: req.body.estado
         });
+        renta.save(function(err){
+            if(err){return next(err);}
+            console.log(renta);
+        });
         Vehiculo.findOne({descripcion: vehiculo})
                 .exec(function(err, vehiculo){
                     vehiculo.estado = 'Inactivo';
@@ -232,25 +236,68 @@ var insertInspeccion = function(req, res, next){
         
 };
 var getInspeccionClientes = function(req,res,next){
-    console.log(req.user.email);
-    Cliente.findOne({email: 'cliente@rentacar.com'})
+    var clienteEmail = req.query.clienteEmail;
+    Cliente.findOne({email: clienteEmail})
             .exec((err, cliente)=>{
                 if(err){return next(err);}
                 if(!cliente){
-                    res.json([]);
-                    return;
-                }
-                res.json(cliente.inspeccion);
+                    Inspeccion.find({estado:'Activo'})
+                              .exec(function(err, inspeccion){
+                                  if(err){return next(err);}
+                                  res.json({
+                                      inspeccion: inspeccion,
+                                      cliente: "TODOS"
+                                  });
+                                  return;
+                              });
+                   
+                }else{
+
+                
+                res.json({
+                    inspeccion: cliente.inspeccion,
+                    cliente: cliente.nombre
+                });
                 return;
+                }
             });
 };
+
+    var getInspeccionEmpleados = function (req, res, next) {
+        var empleadoEmail = req.query.empleadoEmail;
+        Empleado.findOne({ email: empleadoEmail })
+            .exec((err, empleado) => {
+                if (err) { return next(err); }
+                if (!empleado) {
+                    Inspeccion.find({ estado: 'Activo' })
+                        .exec(function (err, inspeccion) {
+                            if (err) { return next(err); }
+                            res.json({
+                                inspeccion: inspeccion,
+                                empleado: "Todos"
+                            });
+                            return;
+                        });
+
+                } else {
+
+
+                    res.json({
+                        inspeccion: empleado.inspeccion,
+                        empleado: empleado.nombre
+                    });
+                    return;
+                }
+            });
+    };
 
 return {
     changeEstadoVehiculo: changeEstadoVehiculo,
     showVehiculosWithEstadoInspeccion: showVehiculosWithEstadoInspeccion,
     getInsertInspeccion: getInsertInspeccion,
     insertInspeccion: insertInspeccion,
-    getInspeccionClientes: getInspeccionClientes
+    getInspeccionClientes: getInspeccionClientes,
+    getInspeccionEmpleados: getInspeccionEmpleados
 };
 })();
 

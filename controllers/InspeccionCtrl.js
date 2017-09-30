@@ -29,6 +29,7 @@ var Ctrl = (function(){
     };
     var procesarInspeccion = function(req, res, next){
         var path = apiOptions.server+'/api/insertInspeccion/'+req.params.vehiculoDesc;
+        req.body.vehiculo = req.params.vehiculoDesc;
         var requestOptions = {
             url: path,
             method: 'POST',
@@ -62,10 +63,75 @@ var Ctrl = (function(){
             });
         }
     };
+
+    var getInspeccionClientes = function(req, res, next){
+        var clienteEmail = req.query.clienteEmail;
+        var path = "";
+        if(clienteEmail){
+            path = apiOptions.server+'/api/getInspeccionClientes/?clienteEmail='+clienteEmail;
+        }else{
+            path = apiOptions.server +'/api/getInspeccionClientes';
+        }
+        var requestOptions = {
+            url: path,
+            method: 'GET'
+        };
+        request(requestOptions,function(err, response, body){
+            if(err){return next(err);}
+            if(response.statusCode === 404){
+                res.render("error");
+                return;
+            }
+            var insp = JSON.parse(body);
+            var msg = "Todos";
+            if(insp.cliente !== null){
+                msg = insp.cliente;
+            }
+            res.render('ClientesInspeccion',{
+                title: 'Inspeccion Clientes',
+                data: insp.inspeccion,
+                msg: msg
+            });
+            return;
+        });
+    };
+    var getInspeccionEmpleados = function (req, res, next) {
+        var empleadoEmail = req.query.empleadoEmail;
+        var path = "";
+        if (empleadoEmail) {
+            path = apiOptions.server + '/api/getInspeccionEmpleados/?empleadoEmail=' + empleadoEmail;
+        } else {
+            path = apiOptions.server + '/api/getInspeccionEmpleados';
+        }
+        var requestOptions = {
+            url: path,
+            method: 'GET'
+        };
+        request(requestOptions, function (err, response, body) {
+            if (err) { return next(err); }
+            if (response.statusCode === 404) {
+                res.render("error");
+                return;
+            }
+            var insp = JSON.parse(body);
+            var msg = "Todos";
+            if (insp.cliente !== null) {
+                msg = insp.empleado;
+            }
+            res.render('EmpleadosInspeccion', {
+                title: 'Inspeccion Empleados',
+                data: insp.inspeccion,
+                msg: msg
+            });
+            return;
+        });
+    };
     return {
         getAllVehiculosInspeccion: getAllVehiculosInspeccion,
         renderGenInspeccion: renderGenInspeccion,
-        procesarInspeccion: procesarInspeccion
+        procesarInspeccion: procesarInspeccion,
+        getInspeccionClientes: getInspeccionClientes,
+        getInspeccionEmpleados: getInspeccionEmpleados
     };
 })();
 

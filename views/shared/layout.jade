@@ -37,12 +37,26 @@ html
               a(href="/Clientes") Clientes
 
             -}
+            -if(currentUser.tipo == 'admin' || currentUser.tipo == 'empleado'){
             li.dropdown
               a(data-toggle="dropdown", href="#").dropdown-toggle Inspeccion
                 span.caret
               ul.dropdown-menu
                 li
                   a(href="/Inspeccion") Vehiculos Pendientes
+                li
+                  a(href="/Inspeccion/Clientes") Inspeccion Clientes
+                li
+                  a(href="/Inspeccion/Empleados") Inspeccion Empleados
+            li.dropdown
+              a(href="#", data-toggle="dropdown").dropdown-toggle Renta
+                span.caret
+              ul.dropdown-menu
+                li
+                  a(href="/Renta/Clientes") Rentas cliente
+                li
+                  a(href="/Renta/Empleados") Rentas Empleado
+            -}
             li
               a(href="/auth/logout") logout
     block content

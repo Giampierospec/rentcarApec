@@ -15,7 +15,7 @@ var modeloCtrl = require('../controllers/modeloController');
 
 var tipoCombustibleCtrl = require('../controllers/TipoCombustibleController');
 
-var clientesCtrl = require('../controllers/clienteController');
+var clientesCtrl = require('../controllers/ClienteController');
 
 var inspCtrl = require('../controllers/inspeccionController');
 

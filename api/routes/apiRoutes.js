@@ -17,9 +17,9 @@ var tipoCombustibleCtrl = require('../controllers/TipoCombustibleController');
 
 var clientesCtrl = require('../controllers/ClienteController');
 
-var inspCtrl = require('../controllers/inspeccionController');
+var inspCtrl = require('../controllers/InspeccionController');
 
-var rentaCtrl = require('../controllers/rentaController');
+var rentaCtrl = require('../controllers/RentaController');
 //User
 router.route('/Users')
       .get(UserCtrl.getUsers)

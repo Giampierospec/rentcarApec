@@ -5,21 +5,21 @@ var vehiculoCtrl = require('../controllers/VehiculosController');
 var tipoVehiculoCtrl = require('../controllers/tipoVehiculoControlller');
 var marcasCtrl = require('../controllers/marcaController');
 
-var empleadoCtrl = require('../controllers/EmpleadoController');
+var empleadoCtrl = require('../controllers/empleadoController');
 
-var UserCtrl = require('../controllers/UsersController');
+var UserCtrl = require('../controllers/usersController');
 
 var authCtrl = require("../../controllers/authController");
 
 var modeloCtrl = require('../controllers/modeloController');
 
-var tipoCombustibleCtrl = require('../controllers/TipoCombustibleController');
+var tipoCombustibleCtrl = require('../controllers/tipoCombustibleController');
 
-var clientesCtrl = require('../controllers/ClienteController');
+var clientesCtrl = require('../controllers/clienteController');
 
-var inspCtrl = require('../controllers/InspeccionController');
+var inspCtrl = require('../controllers/inspeccionController');
 
-var rentaCtrl = require('../controllers/RentaController');
+var rentaCtrl = require('../controllers/rentaController');
 //User
 router.route('/Users')
       .get(UserCtrl.getUsers)

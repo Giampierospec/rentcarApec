@@ -4,7 +4,8 @@
   "private": true,
   "scripts": {
     "postinstall": "bower install",
-    "start": "nodemon ./bin/www"
+    "start": "node ./bin/www",
+    "mon": "nodemon ./bin/www"
   },
   "dependencies": {
     "app-root-path": "2.0.1",

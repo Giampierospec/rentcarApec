@@ -32,7 +32,8 @@ block content
                                     .form-group.input-group
                                         label.input-group-addon
                                             i.fa.fa-id-card
-                                        input(type="text", name="cedula" id="cedula", placeholder="introduzca una cedula").form-control
+                                        input(type="text", name="cedula", placeholder="introduzca una cedula" v-on:keypress="limitCedula", v-on:keyup="eraseCedulaSpan")#cedula.form-control
+                                        span.text-danger#cedulaLimit
 
                                     .form-group.input-group
                                         label.input-group-addon

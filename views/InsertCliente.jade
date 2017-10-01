@@ -32,17 +32,19 @@ block content
                                     .form-group.input-group
                                         label.input-group-addon
                                             i.fa.fa-id-card
-                                        input(type="text", name="cedula" id="cedula", placeholder="introduzca una cedula").form-control
+                                        input(type="text", name="cedula" placeholder="introduzca una cedula", v-on:keypress="limitCedula", v-on:keyup="eraseCedulaSpan")#cedula.form-control
+                                        span.text-danger#cedulaLimit
 
                                     .form-group.input-group
                                         label.input-group-addon
                                             i.fa.fa-credit-card
-                                        input(type="number", name="tarjeta", placeholder="Introduzca un numero de tarjeta").form-control    
-
+                                        input(type="number", name="tarjeta", placeholder="Introduzca un numero de tarjeta", v-on:keypress="limitCreditCard", v-on:keyup="eraseTarjetaSpan")#creditCard.form-control    
+                                        span.text-danger#tarjetaLimit
                                     .form-group.input-group
                                         label.input-group-addon
                                             i.fa.fa-credit-card
-                                        input(type="number", name="credito", placeholder="Introduzca limite tarjeta de credito").form-control  
+                                        input(type="number", name="credito", placeholder="Introduzca limite tarjeta de credito", v-on:keypress="creditoLimit", v-on:keyup="eraseLimitSpan")#limit.form-control
+                                        span.text-danger#creditoLimit 
                                     .form-group.input-group
                                         label.input-group-addon
                                             i.fa.fa-user

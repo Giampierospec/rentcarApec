@@ -38,8 +38,8 @@ block content
                                     .form-group.input-group
                                         label.input-group-addon
                                             i.fa.fa-fire-extinguisher
-                                        input(type="number", name="cantCombustible"  placeholder="escriba la cantidad de combustible").form-control
-
+                                        input(type="number", name="cantCombustible"  placeholder="escriba la cantidad de combustible", v-on:keypress="limitGalons", v-on:keyup="eraseSpan")#combustible.form-control
+                                        span.text-danger#combustibleLimit
                                     .form-group.input-group
                                         label.input-group-addon
                                             i.fa.fa-car

@@ -8,13 +8,18 @@ block content
             a(href="/tipoVehiculos/Insertar").btn.btn-primary Insertar
             br
             br
+            .form-inline
+                .form-group.input-group
+                    label.input-group-addon
+                        b Tipo Vehiculo
+                    input(type="text").form-control#searchTipoVehiculo
             -if(tv.length > 0){
             table.table.table-responsive
                 thead
                     tr
                         th Tipo Vehiculo
                         th Estado
-                tbody     
+                tbody#tipoVehiculoTable    
                     for t in tv
                         tr
                             td=t.descripcion
@@ -29,4 +34,5 @@ block content
         -}
             
 
-
+block scripts
+    script(src="/js/tipoVehiculos/filter.js")

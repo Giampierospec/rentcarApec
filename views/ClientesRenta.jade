@@ -16,6 +16,21 @@ block content
             select(name="clienteEmail", v-on:change="triggerSubmit" v-model="cliente").form-control#clienteEmail
               option(value="",selected) 
               option(v-for="clienteEmail in dependencies", v-bind:value="clienteEmail.email"){{clienteEmail.nombre}}
+        br
+        br
+        .form-inline
+          .form-group.input-group
+            label.input-group-addon
+              b Fecha
+            input(type="text", id="searchFecha", placeholder="buscar", v-on:keyup="searchByFecha").form-control
+          .form-group.input-group
+              label.input-group-addon
+                b Vehiculo
+              input(type="text", id="searchVehiculo", placeholder="buscar", v-on:keyup="searchByVehiculo").form-control
+          .form-group.input-group
+            label.input-group-addon
+              b Cliente
+            input(type="text", id="searchCliente", placeholder="buscar", v-on:keyup="searchByCliente").form-control
         -if(data.length > 0){
           #printContent
             table(class="table table-responsive")
@@ -25,7 +40,7 @@ block content
                   th Cliente
                   th fecha Renta
                   th Comentario
-              tbody
+              tbody#clienteTable
                 -for(var i = 0; i < data.length; i++){
                 tr
                   td= data[i].vehiculo
@@ -42,7 +57,7 @@ block content
               b No hay nada para mostrar
         -}
 block scripts
-  script(src="/js/inspeccion/getClientes.js")
+  script(src="/js/rentas/getClientes.js")
   
   
 

@@ -16,6 +16,21 @@ block content
             select(name="empleadoEmail", v-on:change="triggerSubmit" v-model="empleado").form-control#empleadoEmail
               option(value="",selected) 
               option(v-for="empleado in dependencies", v-bind:value="empleado.email"){{empleado.nombre}}
+        br
+        br
+        .form-inline
+          .form-group.input-group
+            label.input-group-addon
+              b Fecha
+            input(type="text", id="searchFecha", placeholder="buscar", v-on:keyup="searchByFecha").form-control
+          .form-group.input-group
+              label.input-group-addon
+                b Vehiculo
+              input(type="text", id="searchVehiculo", placeholder="buscar", v-on:keyup="searchByVehiculo").form-control
+          .form-group.input-group
+            label.input-group-addon
+              b Empleado
+            input(type="text", id="searchEmpleado", placeholder="buscar", v-on:keyup="searchByEmpleado").form-control
         -if(data.length > 0){
           #printContent
             table(class="table table-responsive")
@@ -25,7 +40,7 @@ block content
                   th Empleado
                   th fecha Renta
                   th Comentario
-              tbody
+              tbody#empleadoTable
                 -for(var i = 0; i < data.length; i++){
                 tr
                   td= data[i].vehiculo
@@ -42,7 +57,7 @@ block content
               b No hay nada para mostrar
         -}
 block scripts
-  script(src="/js/inspeccion/getEmpleados.js")
+  script(src="/js/rentas/getEmpleados.js")
   
   
 

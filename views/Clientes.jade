@@ -7,6 +7,11 @@ block content
       a(href="/Clientes/Insertar", class="btn btn-primary") Insertar
       br
       br
+      .form-inline
+        .form-group.input-group
+          label.input-group-addon
+            b Nombre Cliente
+          input(type="text", placeholder="buscar").form-control#searchCliente
       -if(cliente.length > 0){
       table(class="table table-responsive")
         thead
@@ -17,7 +22,7 @@ block content
             th Limite Credito
             th Tipo Persona
             th Estado
-        tbody
+        tbody#clienteTable
           -for(var i = 0; i < cliente.length; i++){
           tr
             td= cliente[i].nombre
@@ -35,4 +40,6 @@ block content
             b
               i No hay nada para mostrar
         -}
+block scripts 
+  script(src="/js/clientes/filter.js")
 

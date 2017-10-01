@@ -6,6 +6,11 @@ block content
       h2(class="text-center") Vehículos Pendientes de inspeccion
       br
       br
+      .form-inline
+        .form-group.input-group
+          label.input-group-addon
+            b Vehiculo
+          input(type="text", placeholder="Buscar").form-control#searchVehiculo
       -if(data.length > 0){
       table(class="table table-responsive")
         thead
@@ -19,7 +24,7 @@ block content
             th Modelo
             th Tipo Combustible
             th Estado
-        tbody
+        tbody#vehiculoTable
           -for(var i = 0; i < data.length; i++){
           tr
             td= data[i].descripcion
@@ -40,4 +45,6 @@ block content
           i 
             b No hay nada para mostrar
       -}
+block scripts
+  script(src="/js/vehiculos/filter.js")
 

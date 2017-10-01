@@ -6,5 +6,5 @@ var rentaCtrl = require('../controllers/RentaCtrl');
 router.route('/Clientes')
       .get(authCtrl.ensureIsAuthenticated, authCtrl.checkUserEmpleadoAdmin, rentaCtrl.getRentaClientes);
 router.route('/Empleados')
-    .get(authCtrl.ensureIsAuthenticated, authCtrl.checkUserEmpleadoAdmin, rentaCtrl.getRentaEmpleados);
+    .get(authCtrl.ensureIsAuthenticated, authCtrl.checkAdmin, rentaCtrl.getRentaEmpleados);
 module.exports = router;

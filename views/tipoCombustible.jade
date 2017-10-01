@@ -8,13 +8,18 @@ block content
             a(href="/tipoCombustible/Insertar").btn.btn-primary Insertar
             br
             br
+            .form-inline
+                .form-group.input-group
+                    label.input-group-addon
+                        b Tipo Combustible
+                    input(type="text", placeholder="buscar").form-control#searchCombustible
             -if(tc.length > 0){
             table.table.table-responsive
                 thead
                     tr
                         th Tipo Combustible
                         th Estado
-                tbody 
+                tbody#combustibleTable
                     -for(var i =0; i < tc.length; i++){
                         tr
                             td=tc[i].descripcion
@@ -29,4 +34,6 @@ block content
                     i 
                         b No hay nada para mostrar
             -}
+block scripts
+    script(src="/js/tipoCombustible/filter.js")
 

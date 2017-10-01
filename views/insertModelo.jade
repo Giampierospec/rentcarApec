@@ -22,7 +22,7 @@ block content
                             option(value="", selected, disabled) Escoja una opcion
                             option(v-for="estado in dependencies.estados",v-bind:value="estado.estado"){{estado.estado}}
                     .form-group.input-group
-                        label.input-group-addon estado
+                        label.input-group-addon Marca
                         select(name="marca").form-control
                             option(value="", selected, disabled) Escoja una opcion
                             option(v-for="marca in dependencies.marcas",v-bind:value="marca.descripcion"){{marca.descripcion}}

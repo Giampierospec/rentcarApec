@@ -7,6 +7,11 @@ block content
       a(href="/Empleados/Insertar", class="btn btn-primary") Insertar
       br
       br
+      .form-inline
+        .form-group.input-group
+          label.input-group-addon
+            b Nombre Empleado
+          input(type="text", placeholder="buscar").form-control#searchEmpleado
       -if(data.length > 0){
       table(class="table table-responsive")
         thead
@@ -17,7 +22,7 @@ block content
             th Porciento Comision
             th fecha de Ingreso
             th Estado
-        tbody
+        tbody#empleadoTable
           -for(var i = 0; i < data.length; i++){
           tr
             td= data[i].nombre
@@ -35,4 +40,6 @@ block content
               i
                 b No hay nada para mostrar
           -}
+block scripts
+  script(src="/js/Empleado/filter.js")
 

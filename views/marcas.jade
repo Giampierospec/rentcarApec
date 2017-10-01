@@ -8,13 +8,18 @@ block content
             a(href="/marcaVehiculo/Insertar").btn.btn-primary Insertar
             br
             br
+            .form-inline
+                .form-group.input-group
+                    label.input-group-addon
+                        b Marca 
+                    input(type="text")#searchMarca.form-control
             -if(marcas.length > 0){
             table.table.table-responsive
                 thead
                     tr
                         th Marca
                         th Estado
-                tbody
+                tbody#marcaTable
                     -if(marcas)
                         for marca in marcas
                             tr
@@ -29,3 +34,5 @@ block content
                     i 
                         b No hay nada para mostrar
             -}
+block scripts 
+    script(src="/js/marcas/filter.js")

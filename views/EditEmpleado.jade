@@ -25,8 +25,8 @@ block content
                                     .form-group.input-group
                                         label.input-group-addon
                                             i.fa.fa-id-card
-                                        input(type="text", name="cedula" id="cedula", placeholder="introduzca una cedula", v-model="dependencies.empleado.cedula").form-control
-
+                                        input(type="text", name="cedula" id="cedula", placeholder="introduzca una cedula", v-model="dependencies.empleado.cedula", v-on:keypress="limitCedula", v-on:keyup="eraseCedulaSpan").form-control
+                                        span.text-danger#cedulaLimit
                                     .form-group.input-group
                                         label.input-group-addon
                                             i.fa.fa-calendar-times-o
@@ -43,6 +43,6 @@ block content
                                             option(value="", disabled, selected) Escoja una opcion
                                             option(v-for="estado in dependencies.estados" v:bind-value="estado.estado") {{estado.estado}}
                                     .form-group
-                                        button(type="submit").btn.btn-success Insertar
+                                        button(type="submit").btn.btn-success Editar
 block scripts
     script(src="/js/Empleado/editEmpleado.js")

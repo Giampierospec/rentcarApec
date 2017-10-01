@@ -25,17 +25,20 @@ block content
                                     .form-group.input-group
                                         label.input-group-addon
                                             i.fa.fa-id-card
-                                        input(type="text", name="cedula" id="cedula", placeholder="introduzca una cedula",v-model="dependencies.cliente.cedula").form-control
+                                        input(type="text", name="cedula" id="cedula", placeholder="introduzca una cedula",v-model="dependencies.cliente.cedula", v-on:keypress="limitCedula", v-on:keyup="eraseCedulaSpan").form-control
+                                        span.text-danger#cedulaLimit
 
                                     .form-group.input-group
                                         label.input-group-addon
                                             i.fa.fa-credit-card
-                                        input(type="number", name="tarjeta", placeholder="Introduzca un numero de tarjeta",v-model="dependencies.cliente.noTarjetaCR").form-control    
+                                        input(type="number", name="tarjeta", placeholder="Introduzca un numero de tarjeta",v-model="dependencies.cliente.noTarjetaCR", v-on:keypress="limitCreditCard", v-on:keyup="eraseTarjetaSpan").form-control#creditCard 
+                                        span.text-danger#tarjetaLimit 
 
                                     .form-group.input-group
                                         label.input-group-addon
                                             i.fa.fa-credit-card
-                                        input(type="number", name="credito", placeholder="Introduzca limite tarjeta de credito",v-model="dependencies.cliente.limiteCredito").form-control  
+                                        input(type="number", name="credito", placeholder="Introduzca limite tarjeta de credito",v-model="dependencies.cliente.limiteCredito", v-on:keypress="creditoLimit", v-on:keyup="eraseLimitSpan").form-control#limit 
+                                        span.text-danger#creditoLimit
                                     .form-group.input-group
                                         label.input-group-addon
                                             i.fa.fa-user

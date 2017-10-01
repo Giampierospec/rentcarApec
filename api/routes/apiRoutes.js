@@ -5,7 +5,7 @@ var vehiculoCtrl = require('../controllers/VehiculosController');
 var tipoVehiculoCtrl = require('../controllers/tipoVehiculoControlller');
 var marcasCtrl = require('../controllers/marcaController');
 
-var empleadoCtrl = require('../controllers/empleadoController');
+var empleadoCtrl = require('../controllers/EmpleadoController');
 
 var UserCtrl = require('../controllers/usersController');
 

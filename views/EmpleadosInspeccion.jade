@@ -13,7 +13,7 @@ block content
           .form-group.input-group
             label.input-group-addon
               i.fa.fa-search
-            select(name="empleadoEmail", v-on:change="triggerSubmit" v-model="empleado").form-control#clienteEmail
+            select(name="empleadoEmail", v-on:change="triggerSubmit" v-model="empleado").form-control#empleadoEmail
               option(value="Todos",selected) 
               option(v-for="empleado in dependencies", v-bind:value="empleado.email"){{empleado.nombre}}
         br

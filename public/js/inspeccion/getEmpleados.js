@@ -9,7 +9,7 @@
             },
             methods: {
                 triggerSubmit: function(){
-                    sessionStorage.setItem("empleadoVal",this.empleado);
+                    sessionStorage.setItem("empleadoVal", this.empleado);
                     var empleadoForm = document.getElementById('empleadoForm');
                     empleadoForm.submit();
                 },

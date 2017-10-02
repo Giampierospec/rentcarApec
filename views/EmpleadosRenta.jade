@@ -14,7 +14,7 @@ block content
             label.input-group-addon
               i.fa.fa-search
             select(name="empleadoEmail", v-on:change="triggerSubmit" v-model="empleado").form-control#empleadoEmail
-              option(value="",selected) 
+              option(value="Todos",selected) 
               option(v-for="empleado in dependencies", v-bind:value="empleado.email"){{empleado.nombre}}
         br
         br
